@@ -21,6 +21,7 @@ import App from './App.vue'
 import 'element-ui/lib/theme-default/index.css'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
+import router from './router'
 
 // more grace import third package !
 import moment from 'moment'
@@ -47,10 +48,14 @@ Vue.use(Option);
 locale.use(lang);
 
 
+Vue.prototype.$goRoute = function (index) {
+    this.$router.push(index)
+}
 
 // eslint-disable-next-line no-new
 new Vue({
     el: '#app',
+    router,
     render: h => h(App)
 });
 

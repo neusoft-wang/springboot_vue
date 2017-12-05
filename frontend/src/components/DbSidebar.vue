@@ -1,14 +1,33 @@
 <template>
-    <li class="el-menu-item is-active" style="">{{msg}}</li>
+    <div>
+        <ul>
+            <li class="el-menu-item is-active" style=""  v-for="item in links">
+                <a @click="$goRoute(item.route)">{{item.text}}</a></li>
+        </ul>
+    </div>
 </template>
 
 <script>
 
     export default {
         name: 'db-sidebar',
-        data() {
+        data () {
             return {
-                msg: 'Dashboard'
+                links: [
+                    {
+                        text: 'Dashboard',
+                        route: '/dashboard'
+                    },
+                    {
+                        text: 'Information',
+                        route: '/information'
+                    }
+                ]
+            }
+        },
+        methods: {
+            fun() {
+                alert("hello");
             }
         }
     }
