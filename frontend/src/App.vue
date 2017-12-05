@@ -4,9 +4,6 @@
         <el-row class="container">
             <el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
-                <db-sidebar></db-sidebar>
-                <db-sidebar></db-sidebar>
-                <db-sidebar></db-sidebar>
             </el-col>
             <el-col :span="20" class="content">
                 <db-filterinput></db-filterinput>
