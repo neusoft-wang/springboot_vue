@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import dashboard from '../components/dashboard.vue'
-import information from '../components/information.vue'
+import dashboard from '../page/dashboard.vue'
+import information from '../page/information.vue'
+import index from '../pages/index/index.vue'
+import home from '../pages/home/index.vue'
+import login from '../pages/login/index.vue'
+import signout from '../pages/signout/index.vue'
 
 Vue.use(Router)
 
@@ -16,6 +20,29 @@ export default new Router({
             path: '/information',
             name: 'information',
             component: information
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: login
         }
-    ]
+        ,
+        {
+            path: '/home',
+            name: 'home',
+            component: home
+        }
+        ,
+        {
+            path: '/index',
+            name: 'index',
+            component: index
+        }
+        ,
+        {
+            path: '/signout',
+            name: 'signout',
+            component: signout
+        }
+        ]
 })

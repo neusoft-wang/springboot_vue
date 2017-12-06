@@ -1,21 +1,50 @@
 <template>
-   <div>
-       <el-form :inline="true" :model="formInline">
+    <div class="wrapper">
+        <db-header></db-header>
+        <el-row class="container">
+            <router-view></router-view>
+            <!--<el-col :span="4" class="menu">
+                <db-sidebar></db-sidebar>
+            </el-col>
+            <el-col :span="20" class="content">
+                <db-filterinput></db-filterinput>
 
-           <el-form-item label="UserName">
-               <el-input placeholder="Please input PassWord"></el-input>
-           </el-form-item>
+            </el-col>-->
 
-           <el-form-item label="PassWord">
-               <el-input placeholder="Please input PassWord"></el-input>
-           </el-form-item>
-           <button @click="$goRoute(item.route)">/Dashboard</button>
-       </el-form>
-       <router-view></router-view>
-   </div>
+
+        </el-row>
+
+        <el-row>
+            <el-col :span="24">
+                <footer class="footer">
+                    <db-footer></db-footer>
+                </footer>
+
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>
+
+    import DbHeader  from './components/DbHeader.vue'
+    import DbSidebar from './components/DbSidebar.vue'
+    import DbFilterinput from './components/DbFilterinput.vue'
+    import DbTable from './components/DbTable.vue'
+    import DbFooter from './components/DbFooter.vue'
+    import ElRow from "element-ui/packages/row/src/row";
+
+    export default {
+        name: 'app',
+        components: {
+            ElRow, DbHeader,
+            DbSidebar,
+            DbFilterinput,
+            DbTable,
+            DbFooter
+        }
+    }
+
 </script>
 
 <style>

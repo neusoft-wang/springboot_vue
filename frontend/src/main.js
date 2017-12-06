@@ -3,6 +3,9 @@
  */
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import './css/common.css'
+import './less/common.less'
 import {
     Button,
     Select,
@@ -22,7 +25,7 @@ import 'element-ui/lib/theme-default/index.css'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 import router from './router'
-
+import store from './store/'
 // more grace import third package !
 import moment from 'moment'
 import axios from 'axios'
@@ -46,7 +49,17 @@ Vue.use(Dialog);
 Vue.use(Option);
 
 locale.use(lang);
+Vue.use(VueRouter)
 
+/*router.beforeEach(({meta, path}, from, next) => {
+  /!*  var { auth = true } = meta
+    var isLogin = Boolean(store.state.user.id) //true用户已登录， false用户未登录*!/
+
+    if (auth && !isLogin && path !== '/index') {
+        return next()
+    }
+    next({ path: '/index' })
+})*/
 
 Vue.prototype.$goRoute = function (index) {
     this.$router.push(index)
@@ -54,6 +67,7 @@ Vue.prototype.$goRoute = function (index) {
 
 // eslint-disable-next-line no-new
 new Vue({
+    store,
     el: '#app',
     router,
     render: h => h(App)

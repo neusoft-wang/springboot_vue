@@ -61,7 +61,7 @@
 
 <script>
     import Bus from '../eventBus'
-    import DbModal from './DbModal.vue'
+    import DbModal from '../components/DbModal.vue'
 
     export default {
         data(){
