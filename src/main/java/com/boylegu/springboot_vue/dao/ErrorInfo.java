@@ -1,9 +1,5 @@
 package com.boylegu.springboot_vue.dao;
 
-/**
- * Created by gubaoer on 17/7/2.
- */
-
 public class ErrorInfo<T> {
 
     public static final Integer OK = 0;

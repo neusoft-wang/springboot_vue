@@ -28,7 +28,6 @@
 <script>
 
     import DbHeader  from './components/DbHeader.vue'
-    import DbSidebar from './components/DbSidebar.vue'
     import DbFilterinput from './components/DbFilterinput.vue'
     import DbTable from './components/DbTable.vue'
     import DbFooter from './components/DbFooter.vue'
@@ -38,7 +37,6 @@
         name: 'app',
         components: {
             ElRow, DbHeader,
-            DbSidebar,
             DbFilterinput,
             DbTable,
             DbFooter
@@ -75,7 +73,7 @@
     }
 
     .container {
-        padding-top: 70px;
+        padding-top: 35px;
         flex: 1;
     }
 

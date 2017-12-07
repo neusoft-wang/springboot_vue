@@ -4,13 +4,11 @@
      \\/  ___)| |_)| | | | | || (_| |
       '  |____| .__|_| |_|_| |_\__, |
 \  ===========|_|==============|___/== ▀
-\- ▌          SpringBoot-vue             ▀
- - ▌                            (o)        ▀
-/- ▌            Go Go Go !               ▀
+\- ▌               ٩(๑❛ᴗ❛๑)۶             ▀
+ - ▌           (:3[▓▓]快醒醒开学了          ▀
+/- ▌            _φ(❐_❐✧ 人丑就要多读书    ▀
 /  =================================== ▀
-                    ██
 
 ${AnsiColor.BRIGHT_RED}Spring Boot Version : ${spring-boot.version} ${spring-boot.formatted-version}
-${AnsiColor.BRIGHT_CYAN}SpringBoot-Vue.js   : 0.0.1.RELEASE
-${AnsiColor.BRIGHT_BLACK}Author             : Boyle Gu
+${AnsiColor.BRIGHT_BLACK}Author             : zhijia.wang
 

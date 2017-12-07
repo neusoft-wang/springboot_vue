@@ -1,6 +1,4 @@
-<style lang="less" scoped xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
-	   xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
-	   xmlns:v-on="http://www.w3.org/1999/xhtml">
+<style lang="less" scoped xmlns:v-on="http://www.w3.org/1999/xhtml">
 	.login {
 		padding: 50px;
 		text-align: center;

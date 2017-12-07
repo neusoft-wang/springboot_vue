@@ -40,6 +40,12 @@ export default new Router({
         }
         ,
         {
+            path: '/',
+            name: 'index',
+            component: index
+        }
+        ,
+        {
             path: '/signout',
             name: 'signout',
             component: signout
