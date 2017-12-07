@@ -20,7 +20,7 @@
 		</div>
 		<div class="msg" v-if="user.id">
 			<img width="50" :src="logo" alt=""> <br>
-			哈哈，恭喜你已经入坑Vue2
+			哈哈，恭喜你已经入坑Vue
 		</div>
 	</div>
 </template>
