@@ -24,8 +24,8 @@ public class Student implements Serializable {
     */
     private String create_datetime;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
     @Column(name ="passWord")
     private String passWord;
@@ -71,12 +71,14 @@ public class Student implements Serializable {
         this.create_datetime = create_datetime;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+
+        this.name = name;
     }
 
     public String getEmail() {

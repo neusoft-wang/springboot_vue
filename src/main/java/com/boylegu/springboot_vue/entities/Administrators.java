@@ -31,7 +31,20 @@ public class Administrators implements Serializable {
     private String passWord;
 
     @Column(name = "jurisdiction")
-    private boolean Jurisdiction;
+    private String Jurisdiction;
+
+    @Column(name = "number")
+    private String number;
+
+    public String getNumber() {
+
+        return number;
+    }
+
+    public void setNumber(String number) {
+
+        this.number = number;
+    }
 
     public long getId() {
         return id;
@@ -58,12 +71,12 @@ public class Administrators implements Serializable {
         this.username = username;
     }
 
-    public boolean isJurisdiction() {
+    public String getJurisdiction() {
 
         return Jurisdiction;
     }
 
-    public void setJurisdiction(boolean jurisdiction) {
+    public void setJurisdiction(String jurisdiction) {
 
         Jurisdiction = jurisdiction;
     }

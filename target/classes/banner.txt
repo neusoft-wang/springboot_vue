@@ -6,7 +6,7 @@
 \  ===========|_|==============|___/== ▀
 \- ▌               ٩(๑❛ᴗ❛๑)۶             ▀
  - ▌           (:3[▓▓]快醒醒开学了          ▀
-/- ▌            _φ(❐_❐✧ 人丑就要多读书    ▀
+/- ▌           _φ(❐_❐✧ 人丑就要多读书    ▀
 /  =================================== ▀
 
 ${AnsiColor.BRIGHT_RED}Spring Boot Version : ${spring-boot.version} ${spring-boot.formatted-version}

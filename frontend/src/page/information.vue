@@ -55,6 +55,7 @@
                        v-on:current-change="changePage">
         </el-pagination>
         <db-modal :dialogFormVisible="dialogFormVisible" :form="form" v-on:canclemodal="dialogVisible"></db-modal>
+        <db-filterinput></db-filterinput>
     </div>
 
 </template>
@@ -62,6 +63,7 @@
 <script>
     import Bus from '../eventBus'
     import DbModal from '../components/DbModal.vue'
+    import DbFilterinput  from '../components/DbFilterinput.vue'
 
     export default {
         data(){
@@ -78,7 +80,8 @@
             }
         },
         components: {
-            DbModal
+            DbModal,
+            DbFilterinput
         },
         mounted () {
             this.getCustomers();

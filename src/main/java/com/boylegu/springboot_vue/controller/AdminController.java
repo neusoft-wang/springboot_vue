@@ -1,9 +1,9 @@
 package com.boylegu.springboot_vue.controller;
 
-import com.boylegu.springboot_vue.controller.pagination.StudentFormatting;
-import com.boylegu.springboot_vue.controller.pagination.StudentMultiTypeValuesHelper;
-import com.boylegu.springboot_vue.dao.StudentRepository;
-import com.boylegu.springboot_vue.entities.Student;
+import com.boylegu.springboot_vue.controller.pagination.AdminMultiTypeValuesHelper;
+import com.boylegu.springboot_vue.controller.pagination.AdministratorsFormatting;
+import com.boylegu.springboot_vue.dao.AdminRepository;
+import com.boylegu.springboot_vue.entities.Administrators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -25,26 +25,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/Student")
-public class StudentController {
+@RequestMapping("/api/Admin")
+public class AdminController {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private AdminRepository adminRepository;
 
     @Value(("${com.boylegu.paginatio.max-per-page}"))
     Integer maxPerPage;
 
-    @RequestMapping(value = "/stu/sex", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getSexAll() {
+    @RequestMapping(value = "/tea/jurisdiction", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getJurisdictionAll() {
 
         /*
-         * @api {GET} /api/student/number Get all numberList
-         * @apiName GetAllNumberList
+         * @api {GET} /api/Administrators/number Get all numberList
+         * @apiusername GetAllNumberList
          * @apiGroup Info Manage
          * @apiVersion 1.0.0
          * @apiExample {httpie} Example usage:
          *
-         *     http /api/student/Number
+         *     http /api/Administrators/Number
          *
          * @apiSuccess {String} label
          * @apiSuccess {String} value
@@ -52,15 +52,15 @@ public class StudentController {
 
         ArrayList<Map<String, String>> results = new ArrayList<>();
 
-        for (Object value : studentRepository.findSex()) {
+        for (Object value : adminRepository.findJurisdiction()) {
 
-            Map<String, String> sex = new HashMap<>();
+            Map<String, String> jurisdiction = new HashMap<>();
 
-            sex.put("label", value.toString());
+            jurisdiction.put("label", value.toString());
 
-            sex.put("value", value.toString());
+            jurisdiction.put("value", value.toString());
 
-            results.add(sex);
+            results.add(jurisdiction);
         }
 
         ResponseEntity<ArrayList<Map<String, String>>> responseEntity = new ResponseEntity<>(results,
@@ -70,37 +70,37 @@ public class StudentController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, StudentMultiTypeValuesHelper> getStudentAll(
+    public Map<String, AdminMultiTypeValuesHelper> getAdministratorsAll(
             @RequestParam(value = "page", required = false) Integer pages,
-            @RequestParam("name") String name,
+            @RequestParam("username") String username,
             @RequestParam("number") String number
     ) {
 
         /*
-         *   @api {GET} /api/students   Get all or a part of student info
-         *   @apiName GetAllInfoOFStuList
+         *   @api {GET} /api/Administratorss   Get all or a part of Administrators info
+         *   @apiusername GetAllInfoOFStuList
          *   @apiGroup Info Manage
          *   @apiVersion 1.0.0
          *
          *   @apiExample {httpie} Example usage: (support combinatorial search)
          *
-         *       All student：
-         *       http /api/student
+         *       All Administrators：
+         *       http /api/Administrators
          *
-         *       You can according to 'name | number' or 'name & number'
-         *       http /api/student?name=xxx&number=xx
-         *       http /api/student?name=xxx
-         *       http /api/student?number=xx
+         *       You can according to 'username | number' or 'username & number'
+         *       http /api/Administrators?username=xxx&number=xx
+         *       http /api/Administrators?username=xxx
+         *       http /api/Administrators?number=xx
          *
-         *   @apiParam {String} name
+         *   @apiParam {String} username
          *   @apiParam {String} number
          *
          *   @apiSuccess {String} create_datetime
          *   @apiSuccess {String} number
          *   @apiSuccess {String} id
          *   @apiSuccess {String} phone
-         *   @apiSuccess {String} name
          *   @apiSuccess {String} username
+         *   @apiSuccess {String} userusername
          *   @apiSuccess {String} zone
          */
 
@@ -114,43 +114,43 @@ public class StudentController {
 
         Pageable pageable = new PageRequest(pages - 1, maxPerPage, sort);
 
-        StudentFormatting paginInstance = new StudentFormatting();
+        AdministratorsFormatting paginInstance = new AdministratorsFormatting();
 
-        return paginInstance.filterQuery(name, number, pageable);
+        return paginInstance.filterQuery(username, number, pageable);
     }
 
-    @RequestMapping(value = "/detailOfStu/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> getUserDetail(@PathVariable Long id) {
+    @RequestMapping(value = "/detailOfAdm/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Administrators> getUserDetail(@PathVariable Long id) {
 
         /*
-        *    @api {GET} /api/student/detail/:id  details info
-        *    @apiName GetPersonDetails
+        *    @api {GET} /api/Administrators/detail/:id  details info
+        *    @apiusername GetPersonDetails
         *    @apiGroup Info Manage
         *    @apiVersion 1.0.0
         *
         *    @apiExample {httpie} Example usage:
         *
-        *        http GET http://127.0.0.1:8000/api/student/detail/1
+        *        http GET http://127.0.0.1:8000/api/Administrators/detail/1
         *
         *    @apiSuccess {String} number
         *    @apiSuccess {String} id
         *    @apiSuccess {String} phone
-        *    @apiSuccess {String} name
         *    @apiSuccess {String} username
+        *    @apiSuccess {String} userusername
         *    @apiSuccess {String} zone
         */
 
-        Student user = studentRepository.findById(id);
+        Administrators admin = adminRepository.findById(id);
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/detailOfStu/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Student updateUser(@PathVariable Long id, @RequestBody Student data) {
+    public Administrators updateUser(@PathVariable Long id, @RequestBody Administrators data) {
 
         /*
-         *  @api {PUT} /api/student/detail/:id  update student info
-         *  @apiName PutPersonDetails
+         *  @api {PUT} /api/Administrators/detail/:id  update Administrators info
+         *  @apiusername PutPersonDetails
          *  @apiGroup Info Manage
          *  @apiVersion 1.0.0
          *
@@ -161,18 +161,18 @@ public class StudentController {
          *  @apiSuccess {String} number
          *  @apiSuccess {String} id
          *  @apiSuccess {String} phone
-         *  @apiSuccess {String} name
          *  @apiSuccess {String} username
+         *  @apiSuccess {String} userusername
          *  @apiSuccess {String} zone
 
         */
-        Student user = studentRepository.findById(id);
+        Administrators user = adminRepository.findById(id);
 
-        user.setPhone(data.getPhone());
+        user.setJurisdiction(data.getJurisdiction());
 
         user.setPassWord(data.getPassWord());
 
-        return studentRepository.save(user);
+        return adminRepository.save(user);
     }
 
 }
