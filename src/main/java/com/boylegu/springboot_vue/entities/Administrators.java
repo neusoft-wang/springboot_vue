@@ -27,8 +27,8 @@ public class Administrators implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @Column(name ="passWord")
-    private String passWord;
+    @Column(name ="password")
+    private String password;
 
     @Column(name = "jurisdiction")
     private String Jurisdiction;
@@ -83,11 +83,11 @@ public class Administrators implements Serializable {
 
     public String getPassWord() {
 
-        return passWord;
+        return password;
     }
 
     public void setPassWord(String passWord) {
 
-        this.passWord = passWord;
+        this.password = passWord;
     }
 }

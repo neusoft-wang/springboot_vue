@@ -8,7 +8,7 @@
 				<div>
 					<router-link slot="left" to="/">首页</router-link>
 					<router-link slot="right" to="/signout">退出</router-link>
-					<div style="padding: 50px;">欢迎回家</div>
+					<div style="padding: 50px;">{{user.name}}欢迎回家</div>
 				</div>
 			</el-col>
 		</el-row>
@@ -19,9 +19,10 @@
 
     import DbSidebar  from '../../components/DbSidebar.vue'
     import ElCol from "element-ui/packages/col/src/col";
+    import {mapState} from "vuex";
 
     export default {
-        /*computed: mapState({ user: state => state.user }),*/
+        computed: mapState({ user: state => state.user }),
         components:
         {
         	ElCol, DbSidebar

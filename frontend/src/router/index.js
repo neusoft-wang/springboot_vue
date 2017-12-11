@@ -6,6 +6,7 @@ import index from '../pages/index/index.vue'
 import home from '../pages/home/index.vue'
 import login from '../pages/login/index.vue'
 import signout from '../pages/signout/index.vue'
+import register from '../pages/register/register.vue'
 
 Vue.use(Router)
 
@@ -49,6 +50,12 @@ export default new Router({
             path: '/signout',
             name: 'signout',
             component: signout
+        }
+        ,
+        {
+            path: '/register',
+            name: 'register',
+            component: register
         }
         ]
 })

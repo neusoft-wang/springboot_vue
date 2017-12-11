@@ -5,22 +5,23 @@
 		color: #fff;
 		text-align: center;
 		background: #222;
+	}
 		.item {
 			position: absolute;
 			top: 0;
 			bottom: 0;
 			z-index: 1;
+		}
 			a {
 				color: #fff;
 			}
-		}
 		.left {
 			left: 10px;
 		}
 		.right {
 			right: 10px;
 		}
-	}
+
 </style>
 <template>
 	<header class="header">
