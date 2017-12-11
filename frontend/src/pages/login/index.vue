@@ -26,7 +26,7 @@
 		<form class="login">
 			<div class="line">	
 				<div v-show="btn && !form.username">id不能为空</div>
-				<input type="number" placeholder="输入你的id" v-model="form.username">
+				<input type="text" placeholder="输入你的id" v-model="form.username">
 			</div>
 			<div class="line">
 				<div v-show="btn && !form.password">用户名不能为空</div>
