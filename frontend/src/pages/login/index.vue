@@ -33,8 +33,8 @@
 				<input type="text" placeholder="输入你的用户名" v-model="form.password">
 			</div>
 			<button v-on:click="function1">登录</button>
+			<a v-on:click="register">没有账号？马上注册</a>
 		</form>
-		<button v-on:click="register">没有账号？马上注册</button>
 	</div>
 </template>
 <script>
