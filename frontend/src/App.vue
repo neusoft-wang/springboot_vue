@@ -87,7 +87,6 @@
     }
 
     .content {
-        padding-top: 25px;
         padding-right: 25px;
         padding-bottom: 125px;
         padding-left: 25px;

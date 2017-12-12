@@ -81,6 +81,7 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+                this.$router.replace({ path: '/login' })
                 location.reload();
             },
             canclemodal: function () {

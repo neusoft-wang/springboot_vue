@@ -6,12 +6,16 @@
             </el-col>
             <el-col :span = "20" class="content">
                 <div>
+                    <div style="margin-top: 18px">
+                        <db-filterinput></db-filterinput>
+                    </div>
                     <div>
                         <el-table
                                 :data="tableData"
                                 border
                                 style="width: 100%"
                                 class="table">
+
                             <el-table-column
                                     fixed
                                     prop="id"
@@ -62,7 +66,6 @@
                                        v-on:current-change="changePage">
                         </el-pagination>
                         <db-modal :dialogFormVisible="dialogFormVisible" :form="form" v-on:canclemodal="dialogVisible"></db-modal>
-                        <db-filterinput></db-filterinput>
                     </div>
                 </div>
             </el-col>
@@ -157,7 +160,6 @@
 
 <style>
     .table {
-        margin-top: 30px;
     }
 
     .pagination {
