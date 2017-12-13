@@ -21,6 +21,10 @@
                     {
                         text: 'Information',
                         route: '/information'
+                    },
+                    {
+                        text: 'Dormitory',
+                        route: '/dormitory'
                     }
                 ]
             }

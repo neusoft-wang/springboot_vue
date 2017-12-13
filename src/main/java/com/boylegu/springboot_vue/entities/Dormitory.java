@@ -33,11 +33,11 @@ public class Dormitory implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "isUse")
-    private boolean isUse;
+    @Column(name = "is_use")
+    private boolean is_use;
 
     @Column(name = "state")
-    private String status;
+    private String state;
 
     public long getId() {
         return id;
@@ -86,23 +86,23 @@ public class Dormitory implements Serializable {
         this.description = description;
     }
 
-    public boolean isUse() {
+    public boolean isIs_use() {
 
-        return isUse;
+        return is_use;
     }
 
-    public void setUse(boolean use) {
+    public void setIs_use(boolean is_use) {
 
-        isUse = use;
+        this.is_use = is_use;
     }
 
-    public String getStatus() {
+    public String getState() {
 
-        return status;
+        return state;
     }
 
-    public void setStatus(String status) {
+    public void setState(String state) {
 
-        this.status = status;
+        this.state = state;
     }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import dashboard from '../page/dashboard.vue'
 import information from '../page/information.vue'
+import dormitory from '../page/dormitory.vue'
 import index from '../pages/index/index.vue'
 import home from '../pages/home/index.vue'
 import login from '../pages/login/index.vue'
@@ -21,6 +22,12 @@ export default new Router({
             path: '/information',
             name: 'information',
             component: information
+        }
+        ,
+        {
+            path: '/dormitory',
+            name: 'dormitory',
+            component: dormitory
         },
         {
             path: '/login',
