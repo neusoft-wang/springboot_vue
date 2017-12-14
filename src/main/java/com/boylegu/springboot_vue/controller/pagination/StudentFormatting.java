@@ -86,13 +86,13 @@ class BasePaginationInfoOfStu {
 
 	public StudentRepository instance = SpringUtil.getBean(StudentRepository.class);
 
-	public String number, name;
+	public String number, classInfo;
 
 	public BasePaginationInfoOfStu(String name, String number, Pageable pageable) {
 
 		this.pageable = pageable;
 
-		this.name = name;
+		this.classInfo = name;
 
 		this.number = number;
 	}
@@ -135,19 +135,19 @@ class AllTypeOfStu extends BasePaginationInfoOfStu implements TypesOfStu {
 	}
 }
 
-class nameEmailType extends BasePaginationInfoOfStu implements TypesOfStu {
+class ClassInfoNumber extends BasePaginationInfoOfStu implements TypesOfStu {
 
-	public nameEmailType(String nameName, String number, Pageable pageable) {
+	public ClassInfoNumber(String classInfo, String number, Pageable pageable) {
 
-		super(nameName, number, pageable);
+		super(classInfo, number, pageable);
 
 	}
 
 	public Page<Student> query() {
 
-		return this.instance.findByNameAndNumberContains(
+		return this.instance.findByClassInfoAndNumberContains(
 
-						this.name,
+						this.classInfo,
 
 						this.number,
 
@@ -176,18 +176,18 @@ class nameEmailType extends BasePaginationInfoOfStu implements TypesOfStu {
 
 }
 
-class nameType extends BasePaginationInfoOfStu implements TypesOfStu {
+class ClassType extends BasePaginationInfoOfStu implements TypesOfStu {
 
-	public nameType(String name, String number, Pageable pageable) { //String nameName, String number,
+	public ClassType(String name, String number, Pageable pageable) { //String nameName, String number,
 
 		super(name, number, pageable);
 	}
 
 	public Page<Student> query() {
 
-		return this.instance.findByName(
+		return this.instance.findByClassInfo(
 
-						this.name,
+						this.classInfo,
 
 						this.pageable
 		);
@@ -219,20 +219,20 @@ public class StudentFormatting {
 
 	private Map<String, StudentMultiTypeValuesHelper> results = new HashMap<>();
 
-	public Map<String, StudentMultiTypeValuesHelper> filterQuery(String name, String number, Pageable pageable) {
+	public Map<String, StudentMultiTypeValuesHelper> filterQuery(String classInfo, String number, Pageable pageable) {
 
 		TypesOfStu typeInstance;
 
-		if (name.length() == 0 && number.length() == 0) {
+		if (classInfo.length() == 0 && number.length() == 0) {
 
-			typeInstance = new AllTypeOfStu(name, number, pageable);
+			typeInstance = new AllTypeOfStu(classInfo, number, pageable);
 
-		} else if (name.length() > 0 && number.length() > 0) {
+		} else if (classInfo.length() > 0 && number.length() > 0) {
 
-			typeInstance = new nameEmailType(name, number, pageable);
+			typeInstance = new ClassInfoNumber(classInfo, number, pageable);
 
 		} else {
-			typeInstance = new nameType(name, number, pageable);
+			typeInstance = new ClassType(classInfo, number, pageable);
 		}
 
 		this.multiValue.setCount(typeInstance.getCount());

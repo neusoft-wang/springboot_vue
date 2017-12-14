@@ -114,4 +114,21 @@ public class DormitoryController {
         dormitory.setDor(data.getDor());
         return dormitoryRepository.save(dormitory);
     }
+
+    @RequestMapping(value = "/deleteDor/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean deleteDor(@PathVariable Long id) {
+
+        Dormitory dor = dormitoryRepository.findById(id);
+
+        try
+        {
+            dormitoryRepository.delete(dor);
+            return true;
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -98,7 +98,7 @@
         color: #a4aebd;
         width: 100%;
         z-index: 1000;
-        margin-top: -120px;
+        margin-top: -100px;
         line-height: 1;
         font-size: 22px;
     }

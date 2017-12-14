@@ -26,6 +26,16 @@
                         text: 'Dormitory',
                         route: '/dormitory'
                     }
+                    ,
+                    {
+                        text: 'Teacher',
+                        route: '/teacher'
+                    }
+                    ,
+                    {
+                        text: 'Student',
+                        route: '/student'
+                    }
                 ]
             }
         },

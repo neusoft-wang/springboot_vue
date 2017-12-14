@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,33 +35,20 @@ public class StudentController {
     @Value(("${com.boylegu.paginatio.max-per-page}"))
     Integer maxPerPage;
 
-    @RequestMapping(value = "/stu/sex", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getSexAll() {
-
-        /*
-         * @api {GET} /api/student/number Get all numberList
-         * @apiName GetAllNumberList
-         * @apiGroup Info Manage
-         * @apiVersion 1.0.0
-         * @apiExample {httpie} Example usage:
-         *
-         *     http /api/student/Number
-         *
-         * @apiSuccess {String} label
-         * @apiSuccess {String} value
-         */
+    @RequestMapping(value = "/stu/class", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getClassAll() {
 
         ArrayList<Map<String, String>> results = new ArrayList<>();
 
-        for (Object value : studentRepository.findSex()) {
+        for (Object value : studentRepository.findClass()) {
 
-            Map<String, String> sex = new HashMap<>();
+            Map<String, String> classInfo = new HashMap<>();
 
-            sex.put("label", value.toString());
+            classInfo.put("label", value.toString());
 
-            sex.put("value", value.toString());
+            classInfo.put("value", value.toString());
 
-            results.add(sex);
+            results.add(classInfo);
         }
 
         ResponseEntity<ArrayList<Map<String, String>>> responseEntity = new ResponseEntity<>(results,
@@ -72,38 +60,9 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, StudentMultiTypeValuesHelper> getStudentAll(
             @RequestParam(value = "page", required = false) Integer pages,
-            @RequestParam("name") String name,
+            @RequestParam("classInfo") String classInfo,
             @RequestParam("number") String number
     ) {
-
-        /*
-         *   @api {GET} /api/students   Get all or a part of student info
-         *   @apiName GetAllInfoOFStuList
-         *   @apiGroup Info Manage
-         *   @apiVersion 1.0.0
-         *
-         *   @apiExample {httpie} Example usage: (support combinatorial search)
-         *
-         *       All student：
-         *       http /api/student
-         *
-         *       You can according to 'name | number' or 'name & number'
-         *       http /api/student?name=xxx&number=xx
-         *       http /api/student?name=xxx
-         *       http /api/student?number=xx
-         *
-         *   @apiParam {String} name
-         *   @apiParam {String} number
-         *
-         *   @apiSuccess {String} create_datetime
-         *   @apiSuccess {String} number
-         *   @apiSuccess {String} id
-         *   @apiSuccess {String} phone
-         *   @apiSuccess {String} name
-         *   @apiSuccess {String} username
-         *   @apiSuccess {String} zone
-         */
-
         if (pages == null) {
 
             pages = 1;
@@ -116,29 +75,11 @@ public class StudentController {
 
         StudentFormatting paginInstance = new StudentFormatting();
 
-        return paginInstance.filterQuery(name, number, pageable);
+        return paginInstance.filterQuery(classInfo, number, pageable);
     }
 
     @RequestMapping(value = "/detailOfStu/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Student> getUserDetail(@PathVariable Long id) {
-
-        /*
-        *    @api {GET} /api/student/detail/:id  details info
-        *    @apiName GetPersonDetails
-        *    @apiGroup Info Manage
-        *    @apiVersion 1.0.0
-        *
-        *    @apiExample {httpie} Example usage:
-        *
-        *        http GET http://127.0.0.1:8000/api/student/detail/1
-        *
-        *    @apiSuccess {String} number
-        *    @apiSuccess {String} id
-        *    @apiSuccess {String} phone
-        *    @apiSuccess {String} name
-        *    @apiSuccess {String} username
-        *    @apiSuccess {String} zone
-        */
 
         Student user = studentRepository.findById(id);
 
@@ -148,31 +89,51 @@ public class StudentController {
     @RequestMapping(value = "/detailOfStu/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Student updateUser(@PathVariable Long id, @RequestBody Student data) {
 
-        /*
-         *  @api {PUT} /api/student/detail/:id  update student info
-         *  @apiName PutPersonDetails
-         *  @apiGroup Info Manage
-         *  @apiVersion 1.0.0
-         *
-         *  @apiParam {String} phone
-         *  @apiParam {String} zone
-         *
-         *  @apiSuccess {String} create_datetime
-         *  @apiSuccess {String} number
-         *  @apiSuccess {String} id
-         *  @apiSuccess {String} phone
-         *  @apiSuccess {String} name
-         *  @apiSuccess {String} username
-         *  @apiSuccess {String} zone
+        Student student = studentRepository.findById(id);
 
-        */
-        Student user = studentRepository.findById(id);
+        student.setUsername(data.getUsername());
+        student.setCreate_datetime(new Date().toString());
+        student.setEmail(data.getEmail());
+        student.setPhone(data.getPhone());
 
-        user.setPhone(data.getPhone());
-
-        user.setPassWord(data.getPassWord());
-
-        return studentRepository.save(user);
+        return studentRepository.save(student);
     }
 
+    @RequestMapping(value = "/addStudent", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Student addDormitory(@RequestBody Student data) {
+
+        Student student = new Student();
+
+        student.setName(data.getName());
+        student.setPassWord(data.getPassWord());
+        student.setClassInfo(data.getClassInfo());
+        student.setCreate_datetime(new Date().toString());
+        student.setEmail(data.getEmail());
+        student.setNumber(data.getNumber());
+        student.setPayState(false);
+        student.setSex(data.getSex());
+        student.setUse(false);
+        student.setUseTime(data.getUseTime());
+        student.setPhone(data.getPhone());
+        student.setUsername(data.getUsername());
+
+        return studentRepository.save(student);
+    }
+
+    @RequestMapping(value = "/deleteStu/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean deleteStu(@PathVariable Long id) {
+
+        Student student = studentRepository.findById(id);
+
+        try
+        {
+            studentRepository.delete(student);
+            return true;
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

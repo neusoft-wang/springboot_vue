@@ -10,16 +10,16 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    public static final String FIND_SEX = "select DISTINCT sex from Student s";
+    public static final String FIND_CLASS = "select DISTINCT classInfo from Student s";
 
-    @Query(FIND_SEX)
-    List<Student> findSex();
+    @Query(FIND_CLASS)
+    List<Student> findClass();
 
     Page<Student> findAll(Pageable pageable);
 
-    Page<Student> findByNameAndNumberContains(String name, String number, Pageable pageable);
+    Page<Student> findByClassInfoAndNumberContains(String classInfo, String number, Pageable pageable);
 
-    Page<Student> findByName(String name, Pageable pageable);
+    Page<Student> findByClassInfo(String classInfo, Pageable pageable);
 
     Student findById(Long id);
 

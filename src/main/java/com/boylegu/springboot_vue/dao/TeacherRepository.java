@@ -17,9 +17,9 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Page<Teacher> findAll(Pageable pageable);
 
-    Page<Teacher> findByusernameAndNumberContains(String username, String number, Pageable pageable);
+    Page<Teacher> findBySubjectAndNumberContains(String subject, String number, Pageable pageable);
 
-    Page<Teacher> findByusername(String username, Pageable pageable);
+    Page<Teacher> findByNumber(String number, Pageable pageable);
 
     Teacher findById(Long id);
 

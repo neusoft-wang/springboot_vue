@@ -80,13 +80,13 @@ class BasePaginationInfoOfTea {
 
 	public TeacherRepository instance = SpringUtil.getBean(TeacherRepository.class);
 
-	public String number, username;
+	public String subject, number;
 
-	public BasePaginationInfoOfTea(String username, String number, Pageable pageable) {
+	public BasePaginationInfoOfTea(String subject, String number, Pageable pageable) {
 
 		this.pageable = pageable;
 
-		this.username = username;
+		this.subject = subject;
 
 		this.number = number;
 	}
@@ -95,9 +95,9 @@ class BasePaginationInfoOfTea {
 class AllTypeOfTea extends BasePaginationInfoOfTea implements TypesOfTea {
 
 
-	public AllTypeOfTea(String username, String number, Pageable pageable) { //String stu_username, String stu_number,
+	public AllTypeOfTea(String subject, String number, Pageable pageable) { //String stu_username, String stu_number,
 
-		super(username, number, pageable);
+		super(subject, number, pageable);
 
 	}
 
@@ -129,19 +129,19 @@ class AllTypeOfTea extends BasePaginationInfoOfTea implements TypesOfTea {
 	}
 }
 
-class usernameEmailTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
+class SubjectNumberTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
 
-	public usernameEmailTypeTea(String username, String number, Pageable pageable) {
+	public SubjectNumberTypeTea(String subject, String number, Pageable pageable) {
 
-		super(username, number, pageable);
+		super(subject, number, pageable);
 
 	}
 
 	public Page<Teacher> query() {
 
-		return this.instance.findByusernameAndNumberContains(
+		return this.instance.findBySubjectAndNumberContains(
 
-						this.username,
+						this.subject,
 
 						this.number,
 
@@ -170,18 +170,18 @@ class usernameEmailTypeTea extends BasePaginationInfoOfTea implements TypesOfTea
 
 }
 
-class usernameTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
+class NumberTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
 
-	public usernameTypeTea(String username, String number, Pageable pageable) { //String usernameusername, String number,
+	public NumberTypeTea(String subject, String number, Pageable pageable) { //String usernameusername, String number,
 
-		super(username, number, pageable);
+		super(subject, number, pageable);
 	}
 
 	public Page<Teacher> query() {
 
-		return this.instance.findByusername(
+		return this.instance.findByNumber(
 
-						this.username,
+						this.number,
 
 						this.pageable
 		);
@@ -213,20 +213,20 @@ public class TeacherFormatting {
 
 	private Map<String, TeacherMultiTypeValuesHelper> results = new HashMap<>();
 
-	public Map<String, TeacherMultiTypeValuesHelper> filterQuery(String username, String number, Pageable pageable) {
+	public Map<String, TeacherMultiTypeValuesHelper> filterQuery(String subject, String number, Pageable pageable) {
 
 		TypesOfTea typeInstance;
 
-		if (username.length() == 0 && number.length() == 0) {
+		if (subject.length() == 0 && number.length() == 0) {
 
-			typeInstance = new AllTypeOfTea(username, number, pageable);
+			typeInstance = new AllTypeOfTea(subject, number, pageable);
 
-		} else if (username.length() > 0 && number.length() > 0) {
+		} else if (subject.length() > 0 && number.length() > 0) {
 
-			typeInstance = new usernameEmailTypeTea(username, number, pageable);
+			typeInstance = new SubjectNumberTypeTea(subject, number, pageable);
 
 		} else {
-			typeInstance = new usernameTypeTea(username, number, pageable);
+			typeInstance = new NumberTypeTea(subject, number, pageable);
 		}
 
 		this.multiValue.setCount(typeInstance.getCount());
