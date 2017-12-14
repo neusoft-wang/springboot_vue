@@ -12,11 +12,11 @@
                     </el-select>
                 </el-form-item>
 
-                <el-form-item v-if='formInline.state' label="Description">
+                <el-form-item v-if='formInline.state' label="name">
                     <el-input v-model="formInline.name" placeholder="Please input suffix of name"></el-input>
                 </el-form-item>
 
-                <el-form-item v-else='formInline.state' label="Description">
+                <el-form-item v-else='formInline.state' label="name">
                     <el-input v-model="formInline.name" disabled placeholder="Please input suffix of name"></el-input>
                 </el-form-item>
             </el-form>

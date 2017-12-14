@@ -8,10 +8,6 @@
                 <el-input v-model="form.state" auto-complete="off"></el-input>
             </el-form-item>
 
-            <el-form-item label="is_use" :label-width="formLabelWidth">
-                <el-input v-model="form.is_use" auto-complete="off"></el-input>
-            </el-form-item>
-
             <el-form-item label="description" :label-width="formLabelWidth">
                 <el-input v-model="form.description" auto-complete="off"></el-input>
             </el-form-item>
@@ -42,13 +38,11 @@
                 let itemId = formName.id;
                 let name = formName.name;
                 let state = formName.state;
-                let is_use = formName.is_use;
                 let dor = formName.dor;
                 let description = formName.description;
                 this.$axios.put('http://127.0.0.1:8000/api/dormitory/detailOfDor/' + itemId, {
                     name: name,
                     state :state,
-                    is_use :is_use,
                     dor : dor,
                     description:description,
                 })

@@ -92,11 +92,11 @@ public class DormitoryController {
 
         Dormitory dormitory = dormitoryRepository.findById(id);
 
-        dormitory.setIs_use(data.isIs_use());
         dormitory.setCreate_datetime(new Date().toString());
         dormitory.setDescription(data.getDescription());
         dormitory.setName(data.getName());
         dormitory.setDor(data.getDor());
+        dormitory.setState(data.getState());
 
         return dormitoryRepository.save(dormitory);
     }
@@ -108,7 +108,6 @@ public class DormitoryController {
 
         dormitory.setState(data.getState());
 
-        dormitory.setIs_use(data.isIs_use());
         dormitory.setCreate_datetime(new Date().toString());
         dormitory.setDescription(data.getDescription());
         dormitory.setName(data.getName());

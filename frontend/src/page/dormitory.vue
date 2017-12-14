@@ -45,7 +45,7 @@
                             <el-table-column
                                     prop="create_datetime"
                                     label="create_datetime"
-                                    width="100">
+                                    width="250">
                             </el-table-column>
                             <el-table-column
                                     prop="state"
@@ -66,29 +66,25 @@
                         </el-pagination>
                         <db-modal-dor :dialogFormVisible="dialogFormVisible" :form="form" v-on:canclemodal="dialogVisible"></db-modal-dor>
                         <el-dialog title="New" v-model="dialogFormDor" :close-on-click-modal="false" :show-close="false">
-                            <el-form :model="form">
+                            <el-form :model="newform">
                                 <el-form-item label="name" :label-width="formLabelWidth">
-                                    <el-input v-model="form.name" auto-complete="off"></el-input>
+                                    <el-input v-model="newform.name" auto-complete="off"></el-input>
                                 </el-form-item>
                                 <el-form-item label="state" :label-width="formLabelWidth">
-                                    <el-input v-model="form.state" auto-complete="off"></el-input>
-                                </el-form-item>
-
-                                <el-form-item label="is_use" :label-width="formLabelWidth">
-                                    <el-input v-model="form.is_use" auto-complete="off"></el-input>
+                                    <el-input v-model="newform.state" auto-complete="off"></el-input>
                                 </el-form-item>
 
                                 <el-form-item label="description" :label-width="formLabelWidth">
-                                    <el-input v-model="form.description" auto-complete="off"></el-input>
+                                    <el-input v-model="newform.description" auto-complete="off"></el-input>
                                 </el-form-item>
                                 <el-form-item label="dor" :label-width="formLabelWidth">
-                                    <el-input v-model="form.dor" auto-complete="off"></el-input>
+                                    <el-input v-model="newform.dor" auto-complete="off"></el-input>
                                 </el-form-item>
 
                             </el-form>
                             <div slot="footer" class="dialog-footer">
                                 <el-button :plain="true" type="danger" v-on:click="canclemodal1">Cancel</el-button>
-                                <el-button :plain="true" @click="newformon(form)">Save</el-button>
+                                <el-button :plain="true" @click="creatform(newform)">Save</el-button>
                             </div>
                         </el-dialog>
                     </div>
@@ -115,8 +111,14 @@
                 total: 0,
                 pageSize: 10,
                 currentPage: 1,
-                state: '',
-                name: '',
+                name:'',
+                state:'',
+                newform: {
+                    dor : '',
+                    description : '',
+                    state: '',
+                    name: '',
+                },
                 dialogFormDor: false,
                 dialogFormVisible: false,
                 form: '',
@@ -185,17 +187,14 @@
                 let data = this.$moment(row.create_datetime, this.$moment.ISO_8601);
                 return data.format('YYYY-MM-DD')
             },
-            newformon: function (formName) {
-                alert(formName)
+            creatform: function (formName) {
                 let name = formName.name;
                 let state = formName.state;
-                let is_use = formName.is_use;
                 let dor = formName.dor;
                 let description = formName.description;
                 this.$axios.put('http://127.0.0.1:8000/api/dormitory/addDormitory', {
                     name: name,
                     state :state,
-                    is_use :is_use,
                     dor : dor,
                     description:description,
                 })
