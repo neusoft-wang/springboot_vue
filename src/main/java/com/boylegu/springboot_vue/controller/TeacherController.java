@@ -90,15 +90,10 @@ public class TeacherController {
 
         Teacher teacher = teacherRepository.findById(id);
 
-        teacher.setUsername(data.getUsername());
-        teacher.setPassWord(data.getPassWord());
-        teacher.setClassInfo(data.getClassInfo());
         teacher.setCreate_datetime(new Date().toString());
         teacher.setEmail(data.getEmail());
-        teacher.setNumber(data.getNumber());
-        teacher.setJurisdiction(false);
         teacher.setPhone(data.getPhone());
-        teacher.setSubject(data.getSubject());
+        teacher.setUsername(data.getUsername());
 
         return teacherRepository.save(teacher);
     }

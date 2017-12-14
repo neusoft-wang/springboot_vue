@@ -170,18 +170,18 @@ class SubjectNumberTypeTea extends BasePaginationInfoOfTea implements TypesOfTea
 
 }
 
-class NumberTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
+class SubjectTypeTea extends BasePaginationInfoOfTea implements TypesOfTea {
 
-	public NumberTypeTea(String subject, String number, Pageable pageable) { //String usernameusername, String number,
+	public SubjectTypeTea(String subject, String number, Pageable pageable) { //String usernameusername, String number,
 
 		super(subject, number, pageable);
 	}
 
 	public Page<Teacher> query() {
 
-		return this.instance.findByNumber(
+		return this.instance.findBySubject(
 
-						this.number,
+						this.subject,
 
 						this.pageable
 		);
@@ -226,7 +226,7 @@ public class TeacherFormatting {
 			typeInstance = new SubjectNumberTypeTea(subject, number, pageable);
 
 		} else {
-			typeInstance = new NumberTypeTea(subject, number, pageable);
+			typeInstance = new SubjectTypeTea(subject, number, pageable);
 		}
 
 		this.multiValue.setCount(typeInstance.getCount());

@@ -19,7 +19,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Page<Teacher> findBySubjectAndNumberContains(String subject, String number, Pageable pageable);
 
-    Page<Teacher> findByNumber(String number, Pageable pageable);
+    Page<Teacher> findBySubject(String subject, Pageable pageable);
 
     Teacher findById(Long id);
 
