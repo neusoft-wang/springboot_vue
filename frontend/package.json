@@ -29,7 +29,7 @@
     "cssnano": "^3.10.0",
     "curvejs": "^0.3.3",
     "del": "^2.2.2",
-    "element-ui": "^1.3.5",
+    "element-ui": "^1.4.12",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "gulp": "^3.9.1",

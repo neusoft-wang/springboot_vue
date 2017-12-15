@@ -133,4 +133,13 @@ public class TeacherController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/password", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getUserDetail(@RequestParam("username") String username) {
+
+        String passWord = teacherRepository.findByUsername1(username);
+
+        return new ResponseEntity<>(passWord, HttpStatus.OK);
+    }
+
 }
