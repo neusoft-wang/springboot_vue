@@ -54,7 +54,7 @@
 				</el-input>
 			</el-form-item>
 			<div>
-				<el-select v-model="url" placeholder="请选择类型">
+				<el-select v-model="form.jurisdiction" placeholder="请选择类型">
 					<el-option
 							v-for="item in options"
 							:key="item.value"
@@ -63,7 +63,7 @@
 					</el-option>
 				</el-select>
 			</div>
-			<el-button type="primary" v-on:click="function1(url)">登录</el-button>
+			<el-button type="primary" v-on:click="function1(form.jurisdiction)">登录</el-button>
 			<a v-on:click="register">没有账号？马上注册</a>
 		</el-form>
 	</div>
@@ -89,7 +89,6 @@
                     value: 'Admin',
                     label: 'Admin'
                 }],
-                url:'',
 			}
 		},
 		methods: {
@@ -110,6 +109,7 @@
                     }
                 }).then((response) => {
                     if(response.data == this.form.password){
+                        this.USER_SIGNIN(this.form)
                         this.$router.replace({ path: '/home' })
                     }else {
                         alert("密码错误")

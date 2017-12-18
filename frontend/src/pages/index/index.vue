@@ -26,7 +26,7 @@
 </template>
 <script>
     import { mapState } from 'vuex'
-	import logo from './logo.png'
+	import logo from '../home/logo.png'
     export default {
 		data() {
 			return {
