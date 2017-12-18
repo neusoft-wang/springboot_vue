@@ -1,18 +1,37 @@
 <template>
-    <el-dialog title="Edit" v-model="dialogFormVisible" :close-on-click-modal="false" :show-close="false">
+    <el-dialog title="Dormitory Info" v-model="dialogFormVisible" :close-on-click-modal="false" :show-close="false">
         <el-form :model="form">
-            <el-form-item label="name" :label-width="formLabelWidth">
+
+            <el-form-item v-if="user.jurisdiction !== 'Student'" label="name" :label-width="formLabelWidth">
                 <el-input v-model="form.name" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="state" :label-width="formLabelWidth">
+
+            <el-form-item  v-else="user.jurisdiction !== 'Student'" label="name" :label-width="formLabelWidth">
+                <el-input :disabled="true" v-model="form.name" auto-complete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item v-if="user.jurisdiction !== 'Student'" label="state" :label-width="formLabelWidth">
                 <el-input v-model="form.state" auto-complete="off"></el-input>
             </el-form-item>
 
-            <el-form-item label="description" :label-width="formLabelWidth">
+            <el-form-item v-else="user.jurisdiction !== 'Student'" label="state" :label-width="formLabelWidth">
+                <el-input :disabled="true" v-model="form.state" auto-complete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item v-if="user.jurisdiction !== 'Student'" label="description" :label-width="formLabelWidth">
                 <el-input v-model="form.description" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="dor" :label-width="formLabelWidth">
+
+            <el-form-item v-else="user.jurisdiction !== 'Student'" label="description" :label-width="formLabelWidth">
+                <el-input :disabled="true" v-model="form.description" auto-complete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item v-if="user.jurisdiction !== 'Student'" label="dor" :label-width="formLabelWidth">
                 <el-input v-model="form.dor" auto-complete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item v-else="user.jurisdiction !== 'Student'" label="dor" :label-width="formLabelWidth">
+                <el-input :disabled="true" v-model="form.dor" auto-complete="off"></el-input>
             </el-form-item>
 
         </el-form>
@@ -25,7 +44,9 @@
 
 
 <script>
+    import {mapState} from "vuex";
     export default {
+        computed: mapState({ user: state => state.user }),
         data(){
             return {
                 formLabelWidth: '120px',

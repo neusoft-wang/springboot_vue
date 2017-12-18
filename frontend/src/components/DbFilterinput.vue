@@ -13,7 +13,7 @@
         </el-form-item>
 
         <el-form-item v-if='formInline.sex' label="Description">
-            <el-input v-model="formInline.email" placeholder="Please input suffix of email"></el-input>
+            <el-input v-model="formInline.email" placeholder="Please input suffix of 111email"></el-input>
         </el-form-item>
 
         <el-form-item v-else='formInline.sex' label="Description">

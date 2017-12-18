@@ -51,15 +51,48 @@
         name: 'home',
         methods: {
             changeData() {
-                // 整个 data 被重新赋值时
-                this.dataBar = [
-                    {name: '短袖', value: 1300},
-                    {name: '休闲裤', value: 1222},
-                    {name: '连衣裙', value: 1283},
-                    {name: '外套', value: 1314}
-                ];
-                // data 里一个属性值被修改时
-                this.$set(this.data, 1, {name: '短裙', value: 400});
+
+                if (this.dialogFormVisible === false) {
+                    this.dataBar = [
+                        {name: '东软三期', value: 1300},
+                        {name: '东软二期', value: 1222},
+                        {name: '东软四期', value: 1283},
+                        {name: '东软教师楼', value: 1314}
+                    ];
+                    this.dataLine = [
+                        {name: '东软三期', value: 1300},
+                        {name: '东软二期', value: 1222},
+                        {name: '东软四期', value: 1283},
+                        {name: '东软教师楼', value: 1314}
+                    ];
+                    this.dataSector = [
+                        {name: '东软三期', value: 1300},
+                        {name: '东软二期', value: 1222},
+                        {name: '东软四期', value: 1283},
+                        {name: '东软教师楼', value: 1314}
+                    ];
+                    this.dialogFormVisible = true
+                } else {
+                    this.dataBar = [
+                        {name: '2014', value: 1342},
+                        {name: '2015', value: 2123},
+                        {name: '2016', value: 1654},
+                        {name: '2017', value: 1795},
+                    ];
+                    this.dataLine = [
+                        {name: '2014', value: 1342},
+                        {name: '2015', value: 2123},
+                        {name: '2016', value: 1654},
+                        {name: '2017', value: 1795},
+                    ];
+                    this.dataSector = [
+                        {name: '2014', value: 1342},
+                        {name: '2015', value: 2123},
+                        {name: '2016', value: 1654},
+                        {name: '2017', value: 1795},
+                    ];
+                        this.dialogFormVisible = false
+                }
             }
         },
         data() {
@@ -68,6 +101,7 @@
                 typeBar: 'bar',
                 widthBar: 400,
                 heightBar: 250,
+                dialogFormVisible: false,
                 dataBar: [
                     {name: '2014', value: 1342},
                     {name: '2015', value: 2123},

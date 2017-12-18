@@ -131,4 +131,10 @@ public class DormitoryController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long count() {
+
+        return dormitoryRepository.count();
+    }
 }

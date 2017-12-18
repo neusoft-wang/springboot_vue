@@ -123,24 +123,6 @@ public class AdminController {
     @RequestMapping(value = "/password", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getUserDetail(@RequestParam("username") String username) {
 
-        /*
-        *    @api {GET} /api/Administrators/detail/:id  details info
-        *    @apiusername GetPersonDetails
-        *    @apiGroup Info Manage
-        *    @apiVersion 1.0.0
-        *
-        *    @apiExample {httpie} Example usage:
-        *
-        *        http GET http://127.0.0.1:8000/api/Administrators/detail/1
-        *
-        *    @apiSuccess {String} number
-        *    @apiSuccess {String} id
-        *    @apiSuccess {String} phone
-        *    @apiSuccess {String} username
-        *    @apiSuccess {String} userusername
-        *    @apiSuccess {String} zone
-        */
-
         String passWord = adminRepository.findByUsername1(username);
 
         return new ResponseEntity<>(passWord, HttpStatus.OK);
@@ -149,24 +131,6 @@ public class AdminController {
     @RequestMapping(value = "/detailOfAdm/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Administrators updateUser(@PathVariable Long id, @RequestBody Administrators data) {
 
-        /*
-         *  @api {PUT} /api/Administrators/detail/:id  update Administrators info
-         *  @apiusername PutPersonDetails
-         *  @apiGroup Info Manage
-         *  @apiVersion 1.0.0
-         *
-         *  @apiParam {String} phone
-         *  @apiParam {String} zone
-         *
-         *  @apiSuccess {String} create_datetime
-         *  @apiSuccess {String} number
-         *  @apiSuccess {String} id
-         *  @apiSuccess {String} phone
-         *  @apiSuccess {String} username
-         *  @apiSuccess {String} userusername
-         *  @apiSuccess {String} zone
-
-        */
         Administrators user = adminRepository.findById(id);
 
         user.setJurisdiction(data.getJurisdiction());
@@ -179,24 +143,6 @@ public class AdminController {
     @RequestMapping(value = "/addAdmin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Administrators addAdmin(@RequestBody Administrators data) {
 
-        /*
-         *  @api {PUT} /api/Administrators/detail/:id  update Administrators info
-         *  @apiusername PutPersonDetails
-         *  @apiGroup Info Manage
-         *  @apiVersion 1.0.0
-         *
-         *  @apiParam {String} phone
-         *  @apiParam {String} zone
-         *
-         *  @apiSuccess {String} create_datetime
-         *  @apiSuccess {String} number
-         *  @apiSuccess {String} id
-         *  @apiSuccess {String} phone
-         *  @apiSuccess {String} username
-         *  @apiSuccess {String} userusername
-         *  @apiSuccess {String} zone
-
-        */
         Administrators user = new Administrators();
 
         user.setJurisdiction(data.getJurisdiction());

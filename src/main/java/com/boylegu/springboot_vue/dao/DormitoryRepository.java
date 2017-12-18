@@ -11,9 +11,13 @@ import java.util.List;
 public interface DormitoryRepository extends JpaRepository<Dormitory, Long> {
 
     public static final String FIND_STATE = "select DISTINCT state from Dormitory d";
+    public static final String FIND_COUNT = "select count (state) from Dormitory d";
 
     @Query(FIND_STATE)
     List<Dormitory> findSTATE();
+
+    @Query(FIND_COUNT)
+    long count();
 
     Page<Dormitory> findAll(Pageable pageable);
 

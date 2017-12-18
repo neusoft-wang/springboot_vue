@@ -26,7 +26,7 @@
                     {
                         text: 'Information',
                         route: '/information',
-                        qiana:'Teacher'
+                        qiana:'1'
                     },
                     {
                         text: 'Dormitory',

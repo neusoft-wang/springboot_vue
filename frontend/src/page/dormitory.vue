@@ -11,7 +11,7 @@
                             <db-filterinput-dor></db-filterinput-dor>
                         </el-col>
                         <el-col :span = "4">
-                            <el-button :plain="true" style="float: right;text-align: center;" @click="newDor()" >New</el-button>
+                            <el-button v-if="user.jurisdiction === 'Admin'"  :plain="true" style="float: right;text-align: center;" @click="newDor()" >New</el-button>
                         </el-col>
                     </div>
                     <div>
@@ -57,8 +57,10 @@
                                     label="Operation"
                                     width="130">
                                 <template scope="scope">
-                                    <el-button @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
-                                    <el-button @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
+                                    <el-button v-if="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
+                                    <el-button v-else="user.jurisdiction == 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">See</el-button>
+                                    <el-button v-if="user.jurisdiction !== 'Student'" @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
+                                    <el-button v-else="user.jurisdiction !== 'Student'" @click="deleteItem(scope.$index, tableData)" type="text" size="large">Choice</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -103,8 +105,10 @@
     import DbFilterinputDor  from '../components/DbFilterinputDor.vue'
     import DbSidebar  from '../components/DbSidebar.vue'
     import ElCol from "element-ui/packages/col/src/col";
+    import {mapState} from "vuex";
 
     export default {
+        computed: mapState({user: state => state.user}),
         data(){
             return {
                 tableData: [],
