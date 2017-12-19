@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li class="el-menu-item is-active" style=""  v-for="item in links"  v-if="item.text === user.jurisdiction || item.qiana ==='1' " >
+            <li class="el-menu-item is-active" style=""  v-for="item in links"  v-if="item.qiana === user.jurisdiction || item.qiana ==='1' " >
                 <a @click="$goRoute(item.route)">{{item.text}}</a></li>
         </ul>
     </div>
@@ -27,6 +27,11 @@
                         text: 'Information',
                         route: '/information',
                         qiana:'1'
+                    },
+                    {
+                        text: 'stuHistory',
+                        route: '/stuHistory',
+                        qiana:'Student'
                     },
                     {
                         text: 'Dormitory',

@@ -57,6 +57,19 @@ public class Student implements Serializable {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "dormitory")
+    private Long dormitory;
+
+    public Long getDormitory() {
+
+        return dormitory;
+    }
+
+    public void setDormitory(Long dormitory) {
+
+        this.dormitory = dormitory;
+    }
+
     public String getUsername() {
 
         return username;

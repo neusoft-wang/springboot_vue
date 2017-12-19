@@ -2,7 +2,9 @@ package com.boylegu.springboot_vue.controller;
 
 import com.boylegu.springboot_vue.controller.pagination.StudentFormatting;
 import com.boylegu.springboot_vue.controller.pagination.StudentMultiTypeValuesHelper;
+import com.boylegu.springboot_vue.dao.DormitoryRepository;
 import com.boylegu.springboot_vue.dao.StudentRepository;
+import com.boylegu.springboot_vue.entities.Dormitory;
 import com.boylegu.springboot_vue.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +33,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private DormitoryRepository dormitoryRepository;
 
     @Value(("${com.boylegu.paginatio.max-per-page}"))
     Integer maxPerPage;
@@ -138,11 +143,32 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUserDetail(@RequestParam("username") String username) {
+    public ResponseEntity<String> getUserDetail(@RequestParam( "username") String username) {
 
         String passWord = studentRepository.findByUsername1(username);
 
         return new ResponseEntity<>(passWord, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/addDormitory",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Student addDormitory(
+                    @RequestParam("username") String username,
+                    @RequestParam("id") String id) {
+
+        Student student = studentRepository.findByUsername(username);
+
+        student.setDormitory(Long.parseLong(id));
+
+        return studentRepository.save(student);
+    }
+
+    @RequestMapping(value = "/showHistory",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dormitory showHistory(
+                    @RequestParam("username") String username){
+
+        Dormitory dormitory = dormitoryRepository.findById(studentRepository.findHistory(username));
+
+        return dormitory;
     }
 
 }

@@ -60,7 +60,7 @@
                                     <el-button v-if="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
                                     <el-button v-else="user.jurisdiction == 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">See</el-button>
                                     <el-button v-if="user.jurisdiction !== 'Student'" @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
-                                    <el-button v-else="user.jurisdiction !== 'Student'" @click="deleteItem(scope.$index, tableData)" type="text" size="large">Choice</el-button>
+                                    <el-button v-else="user.jurisdiction !== 'Student'" @click="choice(scope.$index, tableData)" type="text" size="large">Choice</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -113,11 +113,14 @@
             return {
                 tableData: [],
                 apiUrl: 'http://127.0.0.1:8000/api/dormitory',
+                stuUrl: 'http://127.0.0.1:8000/api/Student/addDormitory',
                 total: 0,
                 pageSize: 10,
                 currentPage: 1,
                 name:'',
                 state:'',
+                username:'',
+                id :'',
                 newform: {
                     dor : '',
                     description : '',
@@ -193,6 +196,25 @@
                     console.log(response)
                 });
                 location.reload();
+            },
+            choice: function (index, rows) {
+                this.$axios.get(this.stuUrl, {
+                    params: {
+                        username: this.user.username,
+                        id: rows[index].id,
+                    }
+                }).then((response) => {
+                    this.$message({
+                        message: '已发送请求',
+                        type: 'success'
+                    });
+                }).catch(function (response) {
+                    this.$message({
+                        message: '发送请求失败',
+                        type: 'warning'
+                    });
+                    console.log(response)
+                });
             },
             newDor: function () {
                 this.dialogFormDor = true;
