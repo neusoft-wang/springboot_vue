@@ -29,11 +29,6 @@
                         qiana:'1'
                     },
                     {
-                        text: 'stuHistory',
-                        route: '/stuHistory',
-                        qiana:'Student'
-                    },
-                    {
                         text: 'Dormitory',
                         route: '/dormitory',
                         qiana:'1'
@@ -49,6 +44,11 @@
                         text: 'Student',
                         route: '/student',
                         qiana:'1'
+                    },
+                    {
+                        text: 'stuHistory',
+                        route: '/stuHistory',
+                        qiana:'Student'
                     }]}
         },
         methods: {
