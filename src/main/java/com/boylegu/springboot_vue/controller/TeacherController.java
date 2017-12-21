@@ -1,7 +1,10 @@
 package com.boylegu.springboot_vue.controller;
 
+import com.boylegu.springboot_vue.controller.pagination.StudentFormatting;
+import com.boylegu.springboot_vue.controller.pagination.StudentMultiTypeValuesHelper;
 import com.boylegu.springboot_vue.controller.pagination.TeacherFormatting;
 import com.boylegu.springboot_vue.controller.pagination.TeacherMultiTypeValuesHelper;
+import com.boylegu.springboot_vue.dao.StudentRepository;
 import com.boylegu.springboot_vue.dao.TeacherRepository;
 import com.boylegu.springboot_vue.entities.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class TeacherController {
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Value(("${com.boylegu.paginatio.max-per-page}"))
     Integer maxPerPage;
@@ -142,4 +148,13 @@ public class TeacherController {
         return new ResponseEntity<>(passWord, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/showStudent",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, StudentMultiTypeValuesHelper> showStudent(
+            @RequestParam("username") String username){
+
+        Sort sort = new Sort(Direction.ASC, "id");
+        Pageable pageable = new PageRequest(0, maxPerPage, sort);
+        StudentFormatting studentFormatting = new StudentFormatting();
+        return studentFormatting.findStudentofTeacher(teacherRepository.findClassByUsername1(username), pageable);
+    }
 }

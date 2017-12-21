@@ -95,6 +95,7 @@ public class StudentController {
         student.setCreate_datetime(new Date().toString());
         student.setEmail(data.getEmail());
         student.setPhone(data.getPhone());
+        student.setClassInfo(data.getClassInfo());
 
         return studentRepository.save(student);
     }

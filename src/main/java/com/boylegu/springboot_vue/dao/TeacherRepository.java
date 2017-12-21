@@ -13,9 +13,13 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     public static final String FIND_SUBJECT = "select DISTINCT subject from Teacher t";
     String FIND_PASSWORD = "select passWord from Teacher t where username = :username";
+    String FIND_CLASS = "select classInfo from Teacher t where username = :username";
 
     @Query(FIND_PASSWORD)
     String findByUsername1(@Param("username")String username);
+
+    @Query(FIND_CLASS)
+    String findClassByUsername1(@Param("username")String username);
 
     @Query(FIND_SUBJECT)
     List<Teacher> findSubject();

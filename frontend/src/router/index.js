@@ -11,6 +11,7 @@ import login from '../pages/login/index.vue'
 import signout from '../pages/signout/index.vue'
 import register from '../pages/register/register.vue'
 import stuHistory from '../page/stuHistory.vue'
+import showStudent from '../page/showStudent.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,12 @@ export default new Router({
             path:'/stuHistory',
             name:'stuHistory',
             component: stuHistory
+        }
+        ,
+        {
+            path:'/showStudent',
+            name:'showStudent',
+            component: showStudent
         }
         ,
         {

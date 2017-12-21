@@ -29,223 +29,282 @@ import java.util.Map;
 @Component
 class SpringUtilOfStu implements ApplicationContextAware {
 
-	private static ApplicationContext applicationContext = null;
+    private static ApplicationContext applicationContext = null;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
-		if (SpringUtilOfStu.applicationContext == null) {
+        if (SpringUtilOfStu.applicationContext == null) {
 
-			SpringUtilOfStu.applicationContext = applicationContext;
+            SpringUtilOfStu.applicationContext = applicationContext;
 
-		}
-	}
+        }
+    }
 
-	public static ApplicationContext getApplicationContext() {
+    public static ApplicationContext getApplicationContext() {
 
-		return applicationContext;
+        return applicationContext;
 
-	}
+    }
 
-	public static Object getBean(String name) {
+    public static Object getBean(String name) {
 
-		return getApplicationContext().getBean(name);
+        return getApplicationContext().getBean(name);
 
-	}
+    }
 
-	public static <T> T getBean(Class<T> clazz) {
+    public static <T> T getBean(Class<T> clazz) {
 
-		return getApplicationContext().getBean(clazz);
+        return getApplicationContext().getBean(clazz);
 
-	}
+    }
 
-	public static <T> T getBean(String name, Class<T> clazz) {
+    public static <T> T getBean(String name, Class<T> clazz) {
 
-		return getApplicationContext().getBean(name, clazz);
+        return getApplicationContext().getBean(name, clazz);
 
-	}
+    }
 }
 
 
 interface TypesOfStu {
 
-	public Page<Student> query();
+    public Page<Student> query();
 
-	public Integer getCount();
+    public Integer getCount();
 
-	public Integer getPageNumber();
+    public Integer getPageNumber();
 
-	public Long getTotal();
+    public Long getTotal();
 
-	public Object getContent();
+    public Object getContent();
 }
 
 class BasePaginationInfoOfStu {
 
-	public Pageable pageable;
+    public Pageable pageable;
 
-	public StudentRepository instance = SpringUtil.getBean(StudentRepository.class);
+    public StudentRepository instance = SpringUtil.getBean(StudentRepository.class);
 
-	public String number, classInfo;
+    public String number, classInfo;
 
-	public BasePaginationInfoOfStu(String name, String number, Pageable pageable) {
+    public BasePaginationInfoOfStu(String classInfo, String number, Pageable pageable) {
 
-		this.pageable = pageable;
+        this.pageable = pageable;
 
-		this.classInfo = name;
+        this.classInfo = classInfo;
 
-		this.number = number;
-	}
+        this.number = number;
+    }
+
+    public BasePaginationInfoOfStu(String classInfo, Pageable pageable) {
+        this.classInfo = classInfo;
+        this.pageable = pageable;
+    }
 }
 
 class AllTypeOfStu extends BasePaginationInfoOfStu implements TypesOfStu {
 
 
-	public AllTypeOfStu(String name, String number, Pageable pageable) { //String stu_name, String stu_number,
+    public AllTypeOfStu(String name, String number, Pageable pageable) { //String stu_name, String stu_number,
 
-		super(name, number, pageable);
+        super(name, number, pageable);
 
-	}
+    }
 
-	public Page<Student> query() {
+    public Page<Student> query() {
 
-		return this.instance.findAll(
+        return this.instance.findAll(
 
-						this.pageable
+                this.pageable
 
-		);
-	}
+        );
+    }
 
-	public Integer getCount() {
-		return this.query().getSize();
-	}
+    public Integer getCount() {
+        return this.query().getSize();
+    }
 
-	public Integer getPageNumber() {
+    public Integer getPageNumber() {
 
-		return this.query().getNumber();
+        return this.query().getNumber();
 
-	}
+    }
 
-	public Long getTotal() {
-		return this.query().getTotalElements();
-	}
+    public Long getTotal() {
+        return this.query().getTotalElements();
+    }
 
-	public Object getContent() {
-		return this.query().getContent();
-	}
+    public Object getContent() {
+        return this.query().getContent();
+    }
 }
 
 class ClassInfoNumber extends BasePaginationInfoOfStu implements TypesOfStu {
 
-	public ClassInfoNumber(String classInfo, String number, Pageable pageable) {
+    public ClassInfoNumber(String classInfo, String number, Pageable pageable) {
 
-		super(classInfo, number, pageable);
+        super(classInfo, number, pageable);
 
-	}
+    }
 
-	public Page<Student> query() {
+    public Page<Student> query() {
 
-		return this.instance.findByClassInfoAndNumberContains(
+        return this.instance.findByClassInfoAndNumberContains(
 
-						this.classInfo,
+                this.classInfo,
 
-						this.number,
+                this.number,
 
-						this.pageable
-		);
-	}
+                this.pageable
+        );
+    }
 
-	public Integer getCount() {
-		return this.query().getSize();
-	}
+    public Integer getCount() {
+        return this.query().getSize();
+    }
 
-	public Integer getPageNumber() {
+    public Integer getPageNumber() {
 
-		return this.query().getNumber();
+        return this.query().getNumber();
 
-	}
+    }
 
-	public Long getTotal() {
-		return this.query().getTotalElements();
-	}
+    public Long getTotal() {
+        return this.query().getTotalElements();
+    }
 
-	public Object getContent() {
-		return this.query().getContent();
-	}
+    public Object getContent() {
+        return this.query().getContent();
+    }
 
 
 }
 
 class ClassType extends BasePaginationInfoOfStu implements TypesOfStu {
 
-	public ClassType(String name, String number, Pageable pageable) { //String nameName, String number,
+    public ClassType(String name, String number, Pageable pageable) { //String nameName, String number,
 
-		super(name, number, pageable);
-	}
+        super(name, number, pageable);
+    }
 
-	public Page<Student> query() {
+    public Page<Student> query() {
 
-		return this.instance.findByClassInfo(
+        return this.instance.findByClassInfoAndDormitoryNotNull(
 
-						this.classInfo,
+                this.classInfo,
 
-						this.pageable
-		);
-	}
+                this.pageable
+        );
+    }
 
-	public Integer getCount() {
-		return this.query().getSize();
-	}
+    public Integer getCount() {
+        return this.query().getSize();
+    }
 
-	public Integer getPageNumber() {
+    public Integer getPageNumber() {
 
-		return this.query().getNumber();
+        return this.query().getNumber();
 
-	}
+    }
 
-	public Long getTotal() {
-		return this.query().getTotalElements();
-	}
+    public Long getTotal() {
+        return this.query().getTotalElements();
+    }
 
-	public Object getContent() {
-		return this.query().getContent();
-	}
+    public Object getContent() {
+        return this.query().getContent();
+    }
 }
 
+class StudentOfTeacher extends BasePaginationInfoOfStu implements TypesOfStu {
+
+    public StudentOfTeacher(String classInfo, Pageable pageable) {
+
+        super(classInfo, pageable);
+    }
+
+    public Page<Student> query() {
+
+        return this.instance.findByClassInfoAndDormitoryNotNull(
+
+                this.classInfo,
+
+                this.pageable
+        );
+    }
+
+    public Integer getCount() {
+        return this.query().getSize();
+    }
+
+    public Integer getPageNumber() {
+
+        return this.query().getNumber();
+
+    }
+
+    public Long getTotal() {
+        return this.query().getTotalElements();
+    }
+
+    public Object getContent() {
+        return this.query().getContent();
+    }
+}
 
 public class StudentFormatting {
 
-	private StudentMultiTypeValuesHelper multiValue = new StudentMultiTypeValuesHelper();
+    private StudentMultiTypeValuesHelper multiValue = new StudentMultiTypeValuesHelper();
 
-	private Map<String, StudentMultiTypeValuesHelper> results = new HashMap<>();
+    private Map<String, StudentMultiTypeValuesHelper> results = new HashMap<>();
 
-	public Map<String, StudentMultiTypeValuesHelper> filterQuery(String classInfo, String number, Pageable pageable) {
+    public Map<String, StudentMultiTypeValuesHelper> filterQuery(String classInfo, String number, Pageable pageable) {
 
-		TypesOfStu typeInstance;
+        TypesOfStu typeInstance;
 
-		if (classInfo.length() == 0 && number.length() == 0) {
+        if (classInfo.length() == 0 && number.length() == 0) {
 
-			typeInstance = new AllTypeOfStu(classInfo, number, pageable);
+            typeInstance = new AllTypeOfStu(classInfo, number, pageable);
 
-		} else if (classInfo.length() > 0 && number.length() > 0) {
+        } else if (classInfo.length() > 0 && number.length() > 0) {
 
-			typeInstance = new ClassInfoNumber(classInfo, number, pageable);
+            typeInstance = new ClassInfoNumber(classInfo, number, pageable);
 
-		} else {
-			typeInstance = new ClassType(classInfo, number, pageable);
-		}
+        } else {
+            typeInstance = new ClassType(classInfo, number, pageable);
+        }
 
-		this.multiValue.setCount(typeInstance.getCount());
+        this.multiValue.setCount(typeInstance.getCount());
 
-		this.multiValue.setPage(typeInstance.getPageNumber() + 1);
+        this.multiValue.setPage(typeInstance.getPageNumber() + 1);
 
-		this.multiValue.setResults(typeInstance.getContent());
+        this.multiValue.setResults(typeInstance.getContent());
 
-		this.multiValue.setTotal(typeInstance.getTotal());
+        this.multiValue.setTotal(typeInstance.getTotal());
 
-		this.results.put("data", this.multiValue);
+        this.results.put("data", this.multiValue);
 
-		return results;
-	}
+        return results;
+    }
+
+    public Map<String, StudentMultiTypeValuesHelper> findStudentofTeacher(String classInfo, Pageable pageable) {
+
+        TypesOfStu typeInstance;
+
+        typeInstance = new StudentOfTeacher(classInfo, pageable);
+
+        this.multiValue.setCount(typeInstance.getCount());
+
+        this.multiValue.setPage(typeInstance.getPageNumber() + 1);
+
+        this.multiValue.setResults(typeInstance.getContent());
+
+        this.multiValue.setTotal(typeInstance.getTotal());
+
+        this.results.put("data", this.multiValue);
+
+        return results;
+    }
 
 }

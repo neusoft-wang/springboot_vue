@@ -12,6 +12,11 @@
                 <el-input v-model="form.email" auto-complete="off"></el-input>
             </el-form-item>
 
+            <el-form-item label="classInfo" :label-width="formLabelWidth">
+                <el-input v-model="form.classInfo" auto-complete="off"></el-input>
+            </el-form-item>
+
+
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button :plain="true" type="danger" v-on:click="canclemodal">Cancel</el-button>
@@ -36,10 +41,12 @@
                 let username = formName.username;
                 let phone = formName.phone;
                 let email = formName.email;
+                let classInfo = formName.classInfo;
                 this.$axios.put('http://127.0.0.1:8000/api/Student/detailOfStu/' + itemId, {
                     username: username,
                     phone :phone,
                     email : email,
+                    classInfo : classInfo,
                 })
                     .then(function (response) {
                         console.log(response);

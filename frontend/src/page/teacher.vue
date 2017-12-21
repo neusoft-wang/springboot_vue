@@ -81,6 +81,10 @@
                                 <el-form-item label="username" :label-width="formLabelWidth">
                                     <el-input v-model="newform.username" auto-complete="off"></el-input>
                                 </el-form-item>
+
+                                <el-form-item label="password" :label-width="formLabelWidth">
+                                    <el-input v-model="newform.password" auto-complete="off" type ='password'></el-input>
+                                </el-form-item>
                                 <el-form-item label="subject" :label-width="formLabelWidth">
                                     <el-input v-model="newform.subject" auto-complete="off"></el-input>
                                 </el-form-item>
@@ -137,6 +141,7 @@
                     phone: '',
                     email: '',
                     classInfo: '',
+                    password:''
                 },
                 dialogFormDor: false,
                 dialogFormVisible: false,
@@ -223,6 +228,7 @@
                 let number = formName.number;
                 let email = formName.email;
                 let classInfo = formName.classInfo;
+                let password = formName.password;
                 this.$axios.put('http://127.0.0.1:8000/api/Teacher/addTeacher', {
                     subject : subject,
                     number : number,
@@ -230,6 +236,7 @@
                     phone: phone,
                     email: email,
                     classInfo: classInfo,
+                    passWord:password,
                 })
                     .then(function (response) {
                         console.log(response);

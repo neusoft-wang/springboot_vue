@@ -49,6 +49,11 @@
                         text: 'stuHistory',
                         route: '/stuHistory',
                         qiana:'Student'
+                    },
+                    {
+                        text: 'showStudent',
+                        route: '/showStudent',
+                        qiana:'Teacher'
                     }]}
         },
         methods: {
