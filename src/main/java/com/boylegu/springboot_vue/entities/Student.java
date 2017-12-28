@@ -60,6 +60,19 @@ public class Student implements Serializable {
     @Column(name = "dormitory")
     private Long dormitory;
 
+    @Column(name = "status")
+    private Long status;
+
+    public Long getStatus() {
+
+        return status;
+    }
+
+    public void setStatus(Long status) {
+
+        this.status = status;
+    }
+
     public Long getDormitory() {
 
         return dormitory;

@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <el-row class="container">
-            <el-col :span="4" class="menu">
+            <el-col :span="2" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
-            <el-col :span="20" class="content">
+            <el-col :span="22" class="content">
                 <div style="margin-top: 18px">
                 </div>
                 <el-table
@@ -57,10 +57,10 @@
                     <el-table-column
                             fixed="right"
                             label="Operation"
-                            width="130">
-                        <template scope="scope">
-                            <el-button @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
-                            <el-button @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
+                            width="180">
+                        <template scope="scope" >
+                            <el-button @click="confirm" type="text" size="large">Confirm</el-button>
+                            <el-button @click="disagree" type="text" size="large">Disagree</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -69,7 +69,7 @@
                 </el-pagination>
                 <div style="margin-top: 18px">
                 </div>
-                <el-steps :space="386" :active="1" finish-status="success">
+                <el-steps :space="386" :active="active" :finish-status="status">
                     <el-step title="待审核"></el-step>
                     <el-step title="审核结果"></el-step>
                 </el-steps>
@@ -92,6 +92,8 @@
         },
         data(){
             return {
+                status: 'success',
+                active: 1,
                 tableData: [],
                 apiUrl: 'http://127.0.0.1:8000/api/Teacher/showStudent',
                 total: 0,
@@ -125,6 +127,17 @@
                 }).catch(function (response) {
                     console.log(response)
                 });
+            },
+            confirm: function () {
+                if (this.active = 1) {
+                    this.active = 2;
+                    this.status = 'success'
+                }},
+            disagree: function () {
+                if (this.active = 1) {
+                    this.active = 2;
+                    this.status = 'error'
+                }
             }
         }
     }

@@ -1,8 +1,11 @@
 <template>
     <div>
         <ul>
-            <li class="el-menu-item is-active" style=""  v-for="item in links"  v-if="item.qiana === user.jurisdiction || item.qiana ==='1' " >
-                <a @click="$goRoute(item.route)">{{item.text}}</a></li>
+            <li class="el-menu-item is-active" style="text-align: center"  v-for="item in links"  v-if="item.qiana === user.jurisdiction || item.qiana ==='1' " >
+                <div @click="$goRoute(item.route)">
+                    <a >{{item.text}}</a>
+                </div>
+            </li>
         </ul>
     </div>
 </template>

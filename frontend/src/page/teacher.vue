@@ -1,17 +1,17 @@
 <template>
     <div class="wrapper">
         <el-row class="container">
-            <el-col :span="4" class="menu">
+            <el-col :span="2" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
-            <el-col :span = "20" class="content">
+            <el-col :span = "22" class="content">
                 <div>
                     <div style="margin-top: 18px">
                         <el-col :span = "20">
                             <db-filterinput-tea></db-filterinput-tea>
                         </el-col>
                         <el-col :span = "4">
-                            <el-button :plain="true" style="float: right;text-align: center;" @click="newTea()" >New</el-button>
+                            <el-button v-if="user.jurisdiction === 'Admin'"  :plain="true" style="float: right;text-align: center;" @click="newTea()" >New</el-button>
                         </el-col>
                     </div>
                     <div>
@@ -66,9 +66,11 @@
                                     fixed="right"
                                     label="Operation"
                                     width="130">
-                                <template scope="scope">
+                                <template scope="scope" v-if="user.jurisdiction === 'Admin'">
                                     <el-button @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
                                     <el-button @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
+                                </template>
+                                <template scope="scope" v-if="user.jurisdiction !== 'Admin'">
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -123,8 +125,10 @@
     import DbFilterinputTea  from '../components/DbFilterinputTea.vue'
     import DbSidebar  from '../components/DbSidebar.vue'
     import ElCol from "element-ui/packages/col/src/col";
+    import {mapState} from "vuex";
 
     export default {
+        computed: mapState({user: state => state.user}),
         data(){
             return {
                 tableData: [],

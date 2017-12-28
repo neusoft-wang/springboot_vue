@@ -154,6 +154,7 @@ public class StudentController {
         Student student = studentRepository.findByUsername(username);
 
         student.setDormitory(Long.parseLong(id));
+        student.setStatus(Long.parseLong("1"));
 
         return studentRepository.save(student);
     }
