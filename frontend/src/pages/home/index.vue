@@ -25,11 +25,21 @@
         {
             ElCol,DbSidebar
 		},
+		data(){
+            return{
+			}
+		},
         methods: {
+            reload(){
+                    /*location.reload();*/
+			},
             submit() {
                 alert(this.user.username)
             }
-        }
+        },
+        mounted () {
+            this.reload();
+		}
 
     }
 

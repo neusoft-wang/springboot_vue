@@ -190,7 +190,7 @@ class ClassType extends BasePaginationInfoOfStu implements TypesOfStu {
 
     public Page<Student> query() {
 
-        return this.instance.findByClassInfoAndDormitoryNotNull(
+        return this.instance.findByClassInfoAndStatusNotNull(
 
                 this.classInfo,
 
@@ -226,7 +226,7 @@ class StudentOfTeacher extends BasePaginationInfoOfStu implements TypesOfStu {
 
     public Page<Student> query() {
 
-        return this.instance.findByClassInfoAndDormitoryNotNull(
+        return this.instance.findByClassInfoAndStatusNotNull(
 
                 this.classInfo,
 

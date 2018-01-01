@@ -1,7 +1,7 @@
 <template>
     <el-col class="wrapper">
         <el-row class="container">
-            <el-col :span="2" class="menu">
+            <el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
             <el-col :span="10">

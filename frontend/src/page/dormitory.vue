@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <el-row class="container">
-            <el-col :span="2" class="menu">
+            <el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
-            <el-col :span = "22" class="content">
+            <el-col :span = "20" class="content">
                 <div>
                     <div style="margin-top: 18px">
                         <el-col :span = "20">
@@ -58,7 +58,7 @@
                                     width="130">
                                 <template scope="scope">
                                     <el-button v-if="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
-                                    <el-button v-else="user.jurisdiction == 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">See</el-button>
+                                    <el-button v-else="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">See</el-button>
                                     <el-button v-if="user.jurisdiction !== 'Student'" @click="deleteItem(scope.$index, tableData)" type="text" size="large">Delete</el-button>
                                     <el-button v-else="user.jurisdiction !== 'Student'" @click="choice(scope.$index, tableData)" type="text" size="large">Choice</el-button>
                                 </template>

@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <el-row class="container">
-            <el-col :span="2" class="menu">
+            <el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
-            <el-col :span="22" class="content">
+            <el-col :span="20" class="content">
                 <div style="margin-top: 18px">
                 </div>
                 <el-table
@@ -48,7 +48,7 @@
                 </el-table>
                 <div style="margin-top: 18px">
                 </div>
-                <el-steps :space="386" :active="1" finish-status="success" >
+                <el-steps :space="386" :active="active" :finish-status="status" >
                     <el-step title="已申请"></el-step>
                     <el-step title="待审核"></el-step>
                     <el-step title="审核结果"></el-step>
@@ -72,6 +72,8 @@
         },
         data(){
             return {
+                status:'success',
+                active:'1',
                 tableData: [],
                 apiUrl: 'http://127.0.0.1:8000/api/Student/showHistory',
                 total: 1,
@@ -85,6 +87,7 @@
         },
         mounted () {
             this.getCustomers();
+            this.getStatus();
             Bus.$on('filterResultData', (data) => {
                 this.tableData = data.results;
                 this.total = data.total_pages;
@@ -101,6 +104,26 @@
                     this.tableData = response;
                     console.log(response.data.data);
                 }).catch(function (response) {
+                    console.log(response)
+                });
+            },
+            getStatus:function(){
+                this.$axios.get('http://127.0.0.1:8000/api/Student/getStatus',{
+                    params: {
+                        username: this.user.username,
+                    }
+                }).then((response) => {
+                    if(response.data === ''){
+                        this.active = '2';
+                    }else {
+                        this.active = response.data;
+                    }
+
+                }).catch(function (response) {
+                    this.$message({
+                        message: '发送请求失败',
+                        type: 'warning'
+                    });
                     console.log(response)
                 });
             }

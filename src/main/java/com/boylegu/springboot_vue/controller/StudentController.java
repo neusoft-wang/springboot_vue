@@ -126,46 +126,56 @@ public class StudentController {
 
         Student student = studentRepository.findById(id);
 
-        try
-        {
+        try {
             studentRepository.delete(student);
             return true;
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUserDetail(@RequestParam( "username") String username) {
+    public ResponseEntity<String> getUserDetail(@RequestParam("username") String username) {
 
         String passWord = studentRepository.findByUsername1(username);
 
         return new ResponseEntity<>(passWord, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/addDormitory",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addDormitory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Student addDormitory(
-                    @RequestParam("username") String username,
-                    @RequestParam("id") String id) {
+            @RequestParam("username") String username,
+            @RequestParam("id") String id) {
 
         Student student = studentRepository.findByUsername(username);
 
         student.setDormitory(Long.parseLong(id));
-        student.setStatus(Long.parseLong("1"));
 
         return studentRepository.save(student);
     }
 
-    @RequestMapping(value = "/showHistory",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/showHistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Dormitory showHistory(
-                    @RequestParam("username") String username){
+            @RequestParam("username") String username) {
 
         Dormitory dormitory = dormitoryRepository.findById(studentRepository.findHistory(username));
 
         return dormitory;
     }
 
+    @RequestMapping(value = "/changeStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void changeStatus(@RequestParam("username") String username) {
+
+        Student student = studentRepository.findByUsername(username);
+        student.setStatus(null);
+        studentRepository.save(student);
+    }
+
+    @RequestMapping(value = "/getStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getStatus(@RequestParam("username") String username) {
+
+        Student student = studentRepository.findByUsername(username);
+        return student.getStatus();
+    }
 }

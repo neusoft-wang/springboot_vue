@@ -110,6 +110,7 @@
                 }).then((response) => {
                     if(response.data == this.form.password){
                         this.USER_SIGNIN(this.form)
+                        location.reload()
                         this.$router.replace({ path: '/home' })
                     }else {
                         alert("密码错误")

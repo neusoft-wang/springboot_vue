@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <el-row class="container">
-            <el-col :span="2" class="menu">
+            <el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
-            <el-col :span="22" class="content">
+            <el-col :span="20" class="content">
                 <div style="margin-top: 18px">
                 </div>
                 <el-table
@@ -58,8 +58,9 @@
                             fixed="right"
                             label="Operation"
                             width="180">
-                        <template scope="scope" >
-                            <el-button @click="confirm" type="text" size="large">Confirm</el-button>
+                        <template scope="scope">
+                            <el-button @click="changeStatus(scope.$index,tableData)" type="text" size="large">Confirm
+                            </el-button>
                             <el-button @click="disagree" type="text" size="large">Disagree</el-button>
                         </template>
                     </el-table-column>
@@ -83,14 +84,15 @@
 </template>
 
 <script>
-    import DbSidebar  from '../components/DbSidebar.vue'
+    import DbSidebar from '../components/DbSidebar.vue'
     import {mapState} from "vuex";
+
     export default {
         computed: mapState({user: state => state.user}),
         components: {
             DbSidebar
         },
-        data(){
+        data() {
             return {
                 status: 'success',
                 active: 1,
@@ -102,11 +104,12 @@
                 dialogFormDor: false,
                 dialogFormVisible: false,
                 form: '',
-                formLabelWidth :'120px',
+                formLabelWidth: '120px',
             }
         },
-        mounted () {
+        mounted() {
             this.getCustomers();
+            this.getStatus(1,tableData);
             Bus.$on('filterResultData', (data) => {
                 this.tableData = data.results;
                 this.total = data.total_pages;
@@ -117,7 +120,7 @@
             getCustomers: function () {
                 this.$axios.get(this.apiUrl, {
                     params: {
-                        username:this.user.username
+                        username: this.user.username
                     }
                 }).then((response) => {
                     this.tableData = response.data.data.results;
@@ -132,13 +135,47 @@
                 if (this.active = 1) {
                     this.active = 2;
                     this.status = 'success'
-                }},
+                }
+            },
             disagree: function () {
                 if (this.active = 1) {
                     this.active = 2;
                     this.status = 'error'
                 }
-            }
+            },
+            changeStatus: function (index, rows) {
+                if (this.active = 1) {
+                    this.active = 2;
+                    this.status = 'success'
+                    let name = rows[index].username;
+                    this.$axios.get('http://127.0.0.1:8000/api/Student/changeStatus', {
+                        params: {
+                            username: name,
+                        }
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch(function (response) {
+                        console.log(response)
+                    });
+                }
+
+            },
+            getStatus:function(index, rows){
+                this.$axios.get('http://127.0.0.1:8000/api/Student/getStatus',{
+                    params: {
+                        username: rows[index].username,
+                    }
+                }).then((response) => {
+                    this.active = response.data;
+                }).catch(function (response) {
+                    this.$message({
+                        message: '发送请求失败',
+                        type: 'warning'
+                    });
+                    console.log(response)
+                });
+            },
+
         }
     }
 </script>

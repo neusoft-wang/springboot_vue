@@ -29,7 +29,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Page<Student> findByClassInfoAndNumberContains(String classInfo, String number, Pageable pageable);
 
-    Page<Student> findByClassInfoAndDormitoryNotNull(String classInfo, Pageable pageable);
+    Page<Student> findByClassInfoAndStatusNotNull(String classInfo, Pageable pageable);
 
     Student findByUsername(String username);
 

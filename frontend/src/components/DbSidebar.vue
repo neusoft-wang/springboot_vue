@@ -40,7 +40,7 @@
                     {
                         text: 'Teacher',
                         route: '/teacher',
-                        qiana:'Teacher'
+                        qiana:'Admin'
                     }
                     ,
                     {
