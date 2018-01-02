@@ -29,7 +29,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Page<Student> findByClassInfoAndNumberContains(String classInfo, String number, Pageable pageable);
 
-    Page<Student> findByClassInfoAndStatusNotNull(String classInfo, Pageable pageable);
+    Page<Student> findByClassInfoAndStatus(String classInfo, Long status, Pageable pageable);
+
+    Page<Student> findByClassInfoAndStatus(String classInfo, Pageable pageable);
 
     Student findByUsername(String username);
 

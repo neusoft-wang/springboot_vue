@@ -26,4 +26,6 @@ public interface DormitoryRepository extends JpaRepository<Dormitory, Long> {
     Page<Dormitory> findByState(String is_use, Pageable pageable);
 
     Dormitory findById(Long id);
+
+    Page<Dormitory> findById(Long id, Pageable pageable);
 }

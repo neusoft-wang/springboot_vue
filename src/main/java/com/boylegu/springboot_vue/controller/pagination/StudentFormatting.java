@@ -88,6 +88,8 @@ class BasePaginationInfoOfStu {
 
     public String number, classInfo;
 
+    public Long status;
+
     public BasePaginationInfoOfStu(String classInfo, String number, Pageable pageable) {
 
         this.pageable = pageable;
@@ -97,8 +99,9 @@ class BasePaginationInfoOfStu {
         this.number = number;
     }
 
-    public BasePaginationInfoOfStu(String classInfo, Pageable pageable) {
+    public BasePaginationInfoOfStu(String classInfo, Long status, Pageable pageable) {
         this.classInfo = classInfo;
+        this.status = status;
         this.pageable = pageable;
     }
 }
@@ -190,10 +193,9 @@ class ClassType extends BasePaginationInfoOfStu implements TypesOfStu {
 
     public Page<Student> query() {
 
-        return this.instance.findByClassInfoAndStatusNotNull(
+        return this.instance.findByClassInfoAndStatus(
 
                 this.classInfo,
-
                 this.pageable
         );
     }
@@ -219,17 +221,17 @@ class ClassType extends BasePaginationInfoOfStu implements TypesOfStu {
 
 class StudentOfTeacher extends BasePaginationInfoOfStu implements TypesOfStu {
 
-    public StudentOfTeacher(String classInfo, Pageable pageable) {
+    public StudentOfTeacher(String classInfo, Long status, Pageable pageable) {
 
-        super(classInfo, pageable);
+        super(classInfo, status, pageable);
     }
 
     public Page<Student> query() {
 
-        return this.instance.findByClassInfoAndStatusNotNull(
+        return this.instance.findByClassInfoAndStatus(
 
                 this.classInfo,
-
+                this.status,
                 this.pageable
         );
     }
@@ -288,11 +290,11 @@ public class StudentFormatting {
         return results;
     }
 
-    public Map<String, StudentMultiTypeValuesHelper> findStudentofTeacher(String classInfo, Pageable pageable) {
+    public Map<String, StudentMultiTypeValuesHelper> findStudentofTeacher(String classInfo, long status, Pageable pageable) {
 
         TypesOfStu typeInstance;
 
-        typeInstance = new StudentOfTeacher(classInfo, pageable);
+        typeInstance = new StudentOfTeacher(classInfo, status, pageable);
 
         this.multiValue.setCount(typeInstance.getCount());
 
@@ -306,5 +308,4 @@ public class StudentFormatting {
 
         return results;
     }
-
 }

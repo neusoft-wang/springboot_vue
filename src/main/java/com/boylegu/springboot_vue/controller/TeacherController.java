@@ -155,6 +155,6 @@ public class TeacherController {
         Sort sort = new Sort(Direction.ASC, "id");
         Pageable pageable = new PageRequest(0, maxPerPage, sort);
         StudentFormatting studentFormatting = new StudentFormatting();
-        return studentFormatting.findStudentofTeacher(teacherRepository.findClassByUsername1(username), pageable);
+        return studentFormatting.findStudentofTeacher(teacherRepository.findClassByUsername1(username),Long.parseLong("1"), pageable);
     }
 }

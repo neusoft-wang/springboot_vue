@@ -1,16 +1,14 @@
 package com.boylegu.springboot_vue.controller;
 
+import com.boylegu.springboot_vue.controller.pagination.DormitoryFormatting;
 import com.boylegu.springboot_vue.controller.pagination.DormitoryMultiTypeValuesHelper;
 import com.boylegu.springboot_vue.controller.pagination.StudentFormatting;
 import com.boylegu.springboot_vue.controller.pagination.StudentMultiTypeValuesHelper;
 import com.boylegu.springboot_vue.dao.DormitoryRepository;
 import com.boylegu.springboot_vue.dao.StudentRepository;
-import com.boylegu.springboot_vue.entities.Dormitory;
 import com.boylegu.springboot_vue.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,9 +16,18 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/Student")
@@ -151,31 +158,35 @@ public class StudentController {
         Student student = studentRepository.findByUsername(username);
 
         student.setDormitory(Long.parseLong(id));
+        student.setStatus(Long.parseLong("1"));
 
         return studentRepository.save(student);
     }
 
     @RequestMapping(value = "/showHistory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dormitory showHistory(
+    public Map<String, DormitoryMultiTypeValuesHelper> showHistory(
             @RequestParam("username") String username) {
 
-        Dormitory dormitory = dormitoryRepository.findById(studentRepository.findHistory(username));
-
-        return dormitory;
+        Sort sort = new Sort(Direction.ASC, "id");
+        Pageable pageable = new PageRequest(0, maxPerPage, sort);
+        DormitoryFormatting dormitoryFormatting = new DormitoryFormatting();
+        return dormitoryFormatting.findByID(studentRepository.findHistory(username), pageable);
     }
 
     @RequestMapping(value = "/changeStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void changeStatus(@RequestParam("username") String username) {
+    public void changeStatus(@RequestParam("username") String username, @RequestParam("status") String status) {
 
         Student student = studentRepository.findByUsername(username);
-        student.setStatus(null);
+
+        student.setStatus(Long.parseLong(status));
+
         studentRepository.save(student);
     }
 
     @RequestMapping(value = "/getStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Long getStatus(@RequestParam("username") String username) {
+    public String getStatus(@RequestParam("username") String username) {
 
         Student student = studentRepository.findByUsername(username);
-        return student.getStatus();
+        return student.getStatus().toString();
     }
 }

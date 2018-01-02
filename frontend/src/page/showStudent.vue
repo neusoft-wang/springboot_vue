@@ -151,6 +151,7 @@
                     this.$axios.get('http://127.0.0.1:8000/api/Student/changeStatus', {
                         params: {
                             username: name,
+                            status: '2'
                         }
                     }).then((response) => {
                         console.log(response.data);

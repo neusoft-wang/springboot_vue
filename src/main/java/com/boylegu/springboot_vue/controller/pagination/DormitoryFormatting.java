@@ -77,6 +77,8 @@ class BasePaginationInfoOfDor {
 
 	public String name, state;
 
+	public Long id;
+
 	public BasePaginationInfoOfDor(String state, String name, Pageable pageable) {
 
 		this.pageable = pageable;
@@ -84,6 +86,12 @@ class BasePaginationInfoOfDor {
 		this.state = state;
 
 		this.name = name;
+	}
+
+	public BasePaginationInfoOfDor(Long id, Pageable pageable) {
+
+		this.id = id;
+		this.pageable = pageable;
 	}
 }
 
@@ -100,7 +108,7 @@ class AllTypeOfDor extends BasePaginationInfoOfDor implements TypesOfDor {
 
 		return this.instance.findAll(
 
-										this.pageable
+						this.pageable
 
 		);
 	}
@@ -120,6 +128,46 @@ class AllTypeOfDor extends BasePaginationInfoOfDor implements TypesOfDor {
 	}
 
 	public Object getContent() {
+		return this.query().getContent();
+	}
+}
+
+class FindByID extends BasePaginationInfoOfDor implements TypesOfDor {
+
+	public FindByID(Long id, Pageable pageable) { //String stu_username, String stu_number,
+
+		super(id, pageable);
+
+	}
+
+	public Page<Dormitory> query() {
+
+		return this.instance.findById(
+
+						this.id,
+						this.pageable
+
+		);
+	}
+
+	public Integer getCount() {
+
+		return this.query().getSize();
+	}
+
+	public Integer getPageNumber() {
+
+		return this.query().getNumber();
+
+	}
+
+	public Long getTotal() {
+
+		return this.query().getTotalElements();
+	}
+
+	public Object getContent() {
+
 		return this.query().getContent();
 	}
 }
@@ -237,4 +285,22 @@ public class DormitoryFormatting {
 		return results;
 	}
 
+	public Map<String, DormitoryMultiTypeValuesHelper> findByID(Long id, Pageable pageable) {
+
+		TypesOfDor typeInstance;
+
+		typeInstance = new FindByID(id, pageable);
+
+		this.multiValue.setCount(typeInstance.getCount());
+
+		this.multiValue.setPage(typeInstance.getPageNumber() + 1);
+
+		this.multiValue.setResults(typeInstance.getContent());
+
+		this.multiValue.setTotal(typeInstance.getTotal());
+
+		this.results.put("data", this.multiValue);
+
+		return results;
+	}
 }
