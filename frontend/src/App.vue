@@ -15,11 +15,10 @@
         </el-row>
 
         <el-row>
-            <el-col :span="24">
+            <el-col>
                 <footer class="footer">
                     <db-footer></db-footer>
                 </footer>
-
             </el-col>
         </el-row>
     </div>
@@ -73,12 +72,12 @@
     }
 
     .container {
-        padding-top: 35px;
+      /*  padding-top: 35px;*/
         flex: 1;
     }
 
     .container, .wrapper {
-        height: 100%;
+        height: 94%;
     }
 
     .menu {

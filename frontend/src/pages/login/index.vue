@@ -40,10 +40,8 @@
 	}
 </style>
 <template>
+
 	<div style="text-align: center">
-		<v-header title="登录">
-			<router-link slot="left" to="/">返回</router-link>
-		</v-header>
 		<el-form ref="form" :model="form" label-width="80px" class="login-container">
 			<el-form-item label="Username">
 				<el-input class="input" v-model="form.username" placeholder="username">

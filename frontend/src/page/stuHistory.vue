@@ -38,7 +38,7 @@
                     <el-table-column
                             prop="create_datetime"
                             label="create_datetime"
-                            width="250">
+                            width="245">
                     </el-table-column>
                     <el-table-column
                             prop="state"
