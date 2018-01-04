@@ -1,15 +1,19 @@
 <template>
-    <div class="wrapper">
+    <el-container>
+        <el-header><db-header></db-header></el-header>
+        <el-main><router-view></router-view></el-main>
+        <el-footer> <db-footer></db-footer></el-footer>
+    </el-container>
+    <!--<div class="wrapper">
         <db-header></db-header>
         <el-row class="container">
             <router-view></router-view>
-            <!--<el-col :span="4" class="menu">
+            &lt;!&ndash;<el-col :span="4" class="menu">
                 <db-sidebar></db-sidebar>
             </el-col>
             <el-col :span="20" class="content">
                 <db-filterinput></db-filterinput>
-
-            </el-col>-->
+            </el-col>&ndash;&gt;
 
 
         </el-row>
@@ -17,11 +21,11 @@
         <el-row>
             <el-col>
                 <footer class="footer">
-                    <db-footer></db-footer>
+
                 </footer>
             </el-col>
         </el-row>
-    </div>
+    </div>-->
 </template>
 
 <script>

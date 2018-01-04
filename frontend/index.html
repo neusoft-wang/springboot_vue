@@ -44,6 +44,7 @@
     function init() {
         container = document.createElement('div');
         document.body.appendChild(container);
+        container.style.cssText = "position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:-10000";
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
         camera.position.z = 1000;
         scene = new THREE.Scene();
@@ -71,7 +72,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight + 450);
         container.appendChild(renderer.domElement);
         stats = new Stats();
-        container.appendChild(stats.dom);
         document.addEventListener('mousemove', onDocumentMouseMove, false);
         document.addEventListener('touchstart', onDocumentTouchStart, false);
         document.addEventListener('touchmove', onDocumentTouchMove, false);
@@ -132,7 +132,6 @@
         }
         renderer.render(scene, camera);
         count += 0.1;
-        container.appendChild(camera);
     }
 </script>
 </body>

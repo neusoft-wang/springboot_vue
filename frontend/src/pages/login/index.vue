@@ -44,11 +44,11 @@
 	<div style="text-align: center">
 		<el-form ref="form" :model="form" label-width="80px" class="login-container">
 			<el-form-item label="Username">
-				<el-input class="input" v-model="form.username" placeholder="username">
+				<el-input class="input" v-model="form.username" placeholder="username" clearable>
 				</el-input>
 			</el-form-item>
 			<el-form-item label="Password">
-				<el-input class="input" v-model="form.password"  placeholder="password">
+				<el-input class="input" v-model="form.password" placeholder="password" clearable>
 				</el-input>
 			</el-form-item>
 			<div>
