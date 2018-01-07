@@ -91,7 +91,7 @@
 
     .bg-purple-light {
         height: 70px;
-        background: #334057;;
+        background: #334057;
     }
 
     .grid-content {

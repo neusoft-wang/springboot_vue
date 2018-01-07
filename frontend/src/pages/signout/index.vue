@@ -4,15 +4,14 @@
 		text-align: center;
 		button {
 			padding: 5px 10px;
-		}
+		};
+		height: 70%;
 	}
 </style>
 <template>
-	<div>
 		<div class="btn">
 			<el-button type="primary" v-on:click="submit">确认退出</el-button>
 		</div>
-	</div>
 </template>
 <script>
     import { mapActions } from 'vuex'

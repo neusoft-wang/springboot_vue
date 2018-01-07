@@ -55,7 +55,7 @@
                             <el-table-column
                                     fixed="right"
                                     label="Operation"
-                                    width="130">
+                                    width="150">
                                 <template scope="scope">
                                     <el-button v-if="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
                                     <el-button v-else="user.jurisdiction === 'Admin'" @click="editItem(scope.$index, tableData)" type="text" size="large">See</el-button>
