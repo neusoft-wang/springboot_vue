@@ -1,36 +1,20 @@
 <template>
-    <el-container>
-        <el-header><db-header></db-header></el-header>
-        <el-main><router-view></router-view></el-main>
-        <el-footer class="el-footer" > <db-footer></db-footer></el-footer>
-    </el-container>
-    <!--<div class="wrapper">
-        <db-header></db-header>
-        <el-row class="container">
+    <el-container class="contatner1">
+        <el-header>
+            <db-header></db-header>
+        </el-header>
+        <el-main>
             <router-view></router-view>
-            &lt;!&ndash;<el-col :span="4" class="menu">
-                <db-sidebar></db-sidebar>
-            </el-col>
-            <el-col :span="20" class="content">
-                <db-filterinput></db-filterinput>
-            </el-col>&ndash;&gt;
-
-
-        </el-row>
-
-        <el-row>
-            <el-col>
-                <footer class="footer">
-
-                </footer>
-            </el-col>
-        </el-row>
-    </div>-->
+        </el-main>
+        <el-footer class="el-footer">
+            <db-footer></db-footer>
+        </el-footer>
+    </el-container>
 </template>
 
 <script>
 
-    import DbHeader  from './components/DbHeader.vue'
+    import DbHeader from './components/DbHeader.vue'
     import DbFilterinput from './components/DbFilterinput.vue'
     import DbTable from './components/DbTable.vue'
     import DbFooter from './components/DbFooter.vue'
@@ -66,6 +50,10 @@
         height: 100%;
     }
 
+    .contatner1{
+        background-image: url("../../images/background.png");
+        height: 100%;
+    }
     .wrapper {
 
         position: relative;
@@ -76,7 +64,7 @@
     }
 
     .container {
-      /*  padding-top: 35px;*/
+        /*  padding-top: 35px;*/
         flex: 1;
     }
 
@@ -105,6 +93,7 @@
         line-height: 1;
         font-size: 22px;
     }
+
     .el-header {
         background-color: #B3C0D1;
         color: #333;
@@ -112,7 +101,7 @@
         line-height: 60px;
     }
 
-    .el-footer{
+    .el-footer {
         text-align: center;
         background-color: #324057;
         color: #a4aebd;
@@ -122,6 +111,7 @@
         width: 100%;
         left: 0px;
     }
+
     .el-aside {
         background-color: #D3DCE6;
         color: #333;

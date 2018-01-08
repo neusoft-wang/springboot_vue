@@ -28,9 +28,6 @@
                     </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="/signout">退出</el-dropdown-item>
-                            <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-                            <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
-                            <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>

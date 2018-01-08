@@ -85,7 +85,7 @@
                 location.reload();
             },
             canclemodal: function () {
-                this.$emit('canclemodal');
+                this.$router.push({path: "/login"})
             }
         }
 

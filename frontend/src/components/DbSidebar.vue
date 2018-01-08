@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style=" height: 1000px" >
         <ul>
             <li class="el-menu-item is-active" style="text-align: center"  v-for="item in links"  v-if="item.qiana === user.jurisdiction || item.qiana ==='1' " >
                 <div @click="$goRoute(item.route)">
