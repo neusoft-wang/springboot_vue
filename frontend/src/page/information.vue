@@ -5,69 +5,23 @@
                 <db-sidebar></db-sidebar>
             </el-col>
             <el-col :span = "20" class="content">
-                <div>
-                    <div style="margin-top: 18px">
-                        <db-filterinput></db-filterinput>
-                    </div>
-                    <div>
-                        <el-table
-                                :data="tableData"
-                                border
-                                style="width: 100%"
-                                class="table">
+                <el-form :model="form">
+                    <el-form-item label="Old Pass Word" :label-width="formLabelWidth">
+                        <el-input v-model="form.passWord" auto-complete="off"></el-input>
+                    </el-form-item>
 
-                            <el-table-column
-                                    fixed
-                                    prop="id"
-                                    label="item_id"
-                                    width="100">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="username"
-                                    label="username"
-                                    width="120">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="email"
-                                    label="email"
-                                    width="120">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="phone"
-                                    label="phone"
-                                    width="130">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="sex"
-                                    label="sex"
-                                    width="100">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="zone"
-                                    label="zone"
-                                    width="100">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="create_datetime"
-                                    label="create_datetime"
-                                    width="300"
-                                    :formatter="formatter">
-                            </el-table-column>
-                            <el-table-column
-                                    fixed="right"
-                                    label="Operation"
-                                    width="100">
-                                <template scope="scope">
-                                    <el-button @click="editItem(scope.$index, tableData)" type="text" size="large">Edit</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                        <el-pagination class="pagination" layout="prev, pager, next" :total="total" :page-size="pageSize"
-                                       v-on:current-change="changePage">
-                        </el-pagination>
-                        <db-modal :dialogFormVisible="dialogFormVisible" :form="form" v-on:canclemodal="dialogVisible"></db-modal>
-                    </div>
-                </div>
+                    <el-form-item label="New PassWord" :label-width="formLabelWidth">
+                        <el-input v-model="form.newPassword" auto-complete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="again Pass Word" :label-width="formLabelWidth">
+                        <el-input v-model="form.againPassword" auto-complete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+
+                    <el-button :plain="true" type="danger" v-on:click="canclemodal">Cancel</el-button>
+                    <el-button :plain="true" @click="edit(form)">modify</el-button>
+
             </el-col>
         </el-row>
     </div>
@@ -80,9 +34,11 @@
     import DbModal from '../components/DbModal.vue'
     import DbFilterinput  from '../components/DbFilterinput.vue'
     import DbSidebar  from '../components/DbSidebar.vue'
+    import {mapState} from "vuex"
     import ElCol from "element-ui/packages/col/src/col";
 
     export default {
+        computed: mapState({ user: state => state.user }),
         data(){
             return {
                 tableData: [],
@@ -93,7 +49,12 @@
                 sex: '',
                 email: '',
                 dialogFormVisible: false,
-                form: '',
+                form: {
+                    username:'',
+                    passWord: '',
+                    newPassword: '',
+                    againPassword: ''
+                }
             }
         },
         components: {
@@ -154,6 +115,29 @@
                 let data = this.$moment(row.create_datetime, this.$moment.ISO_8601);
                 return data.format('YYYY-MM-DD')
             },
+            edit: function (formName) {
+                alert("lala");
+                let username = this.user.username;
+                let passWord = formName.passWord;
+                let newPassword = formName.newPassword;
+                let againPassword = formName.againPassword;
+                this.$axios.put('http://127.0.0.1:8000/api/Student/editOfStu/', {
+                    username : username,
+                    newPassword: newPassword,
+                    againPassword: againPassword,
+                    passWord: passWord
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        this.form = response.data;
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                this.$router.replace({ path: '/login' })
+                location.reload();
+            }
         }
     }
 </script>

@@ -7,6 +7,7 @@ import com.boylegu.springboot_vue.controller.pagination.StudentMultiTypeValuesHe
 import com.boylegu.springboot_vue.dao.DormitoryRepository;
 import com.boylegu.springboot_vue.dao.StudentRepository;
 import com.boylegu.springboot_vue.entities.Student;
+import com.boylegu.springboot_vue.entities.editPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -118,6 +119,16 @@ public class StudentController {
         student.setUseTime(data.getUseTime());
         student.setPhone(data.getPhone());
         student.setUsername(data.getUsername());
+
+        return studentRepository.save(student);
+    }
+
+    @RequestMapping(value = "/editOfStu", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Student editOfStu(@RequestBody editPassword data) {
+
+        Student student = studentRepository.findByUsername(data.getUsername());
+
+        student.setPassWord(data.getNewPassword());
 
         return studentRepository.save(student);
     }

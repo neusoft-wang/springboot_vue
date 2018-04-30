@@ -27,10 +27,10 @@ public class Activity implements Serializable {
     @Column(name = "keywords_group")
     private String keywordsGroup;
 
-    @Column(name ="is_use")
+    @Column(name = "is_use")
     private String isUse;
 
-    @Column(name ="add_time")
+    @Column(name = "add_time")
     private String addTime;
 
     @Column(name = "frequency")

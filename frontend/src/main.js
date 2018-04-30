@@ -17,6 +17,7 @@ import moment from 'moment'
 import axios from 'axios'
 import curvejs from 'curvejs'
 import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
 Object.defineProperty(Vue.prototype, '$moment', { value: moment });
 Object.defineProperty(Vue.prototype, '$axios', { value: axios });

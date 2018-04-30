@@ -3,7 +3,7 @@
         <ul>
             <li class="el-menu-item is-active" style="text-align: center"  v-for="item in links"  v-if="item.qiana === user.jurisdiction || item.qiana ==='1' " >
                 <div @click="$goRoute(item.route)">
-                    <a >{{item.text}}</a>
+                    <a @click="fun()">{{item.text}} </a>
                 </div>
             </li>
         </ul>
@@ -13,7 +13,6 @@
 <script>
 
     import {mapState} from "vuex";
-
     export default {
         computed: mapState({ user: state => state.user }),
         name: 'db-sidebar',
@@ -27,8 +26,8 @@
 
                     },
                     {
-                        text: 'Information',
-                        route: '/information',
+                        text: 'Change Password',
+                        route: '/Change_Password',
                         qiana:'1'
                     },
                     {
@@ -60,8 +59,11 @@
                     }]}
         },
         methods: {
-            fun() {
-                alert("hello");
+            fun: function () {
+                if (this.active = 1) {
+                    this.active = 2;
+                    this.status = 'error'
+                }
             }
         }
     }
@@ -71,5 +73,20 @@
 <style>
     li {
         padding-left: 20px;
+    }
+    a:link {
+        color: #FF0000;
+    }
+
+    a:visited {
+        color: #ff0000;
+    }
+
+    a:hover {
+        color: #000000;
+    }
+
+    a:active {
+        color: #ff0000;
     }
 </style>

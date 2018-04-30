@@ -48,7 +48,7 @@
 				</el-input>
 			</el-form-item>
 			<el-form-item label="Password">
-				<el-input class="input" v-model="form.password" placeholder="password" clearable>
+				<el-input class="input" type="password" v-model="form.password" placeholder="password" clearable>
 				</el-input>
 			</el-form-item>
 			<div>

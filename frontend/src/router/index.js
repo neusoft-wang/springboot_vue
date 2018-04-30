@@ -23,7 +23,7 @@ export default new Router({
             component: dashboard
         },
         {
-            path: '/information',
+            path: '/Change_Password',
             name: 'information',
             component: information
         },
